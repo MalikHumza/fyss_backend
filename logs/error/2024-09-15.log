@@ -1,0 +1,110 @@
+2024-09-15 01:10:42 error: uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (node:fs:931:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at SyncWriteStream.Writable.write (node:internal/streams/writable:508:10)
+    at Console.log (/home/malik/Desktop/personal_project/fyss_backend/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/malik/Desktop/personal_project/fyss_backend/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/malik/Desktop/personal_project/fyss_backend/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+    at writeOrBuffer (/home/malik/Desktop/personal_project/fyss_backend/node_modules/readable-stream/lib/_stream_writable.js:381:5)
+    at Console.Writable.write (/home/malik/Desktop/personal_project/fyss_backend/node_modules/readable-stream/lib/_stream_writable.js:302:11)
+2024-09-15 02:18:46 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/infrastructure/middlewares/auth.middleware.ts[0m:[93m5[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m5[0m private session = database.instance.session;
+[7m [0m [91m~~~~~~~[0m
+[96msrc/infrastructure/middlewares/auth.middleware.ts[0m:[93m28[0m:[93m31[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m28[0m         const session = await .findUnique({
+[7m  [0m [91m                              ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/infrastructure/middlewares/auth.middleware.ts[0m:[93m5[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m5[0m private session = database.instance.session;
+[7m [0m [91m~~~~~~~[0m
+[96msrc/infrastructure/middlewares/auth.middleware.ts[0m:[93m28[0m:[93m31[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m28[0m         const session = await .findUnique({
+[7m  [0m [91m                              ~[0m
+
+    at createTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:863:19)
+    at /home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1379:34
+    at Object.compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1458:13)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2024-09-15 02:44:02 error: uncaughtException: Missing initializer in const declaration
+/home/malik/Desktop/personal_project/fyss_backend/src/data/services/auth.service.ts:21
+        const isPassword;
+              ^^^^^^^^^^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (node:internal/modules/cjs/loader:1378:20)
+    at Module._compile (node:internal/modules/cjs/loader:1428:41)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (/home/malik/Desktop/personal_project/fyss_backend/src/domain/usecases/auth/singup.ts:3:1)
+2024-09-15 02:44:06 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/data/services/auth.service.ts[0m:[93m26[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m26[0m     }
+[7m  [0m [91m    ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/data/services/auth.service.ts[0m:[93m26[0m:[93m5[0m - [91merror[0m[90m TS1109: [0mExpression expected.
+
+[7m26[0m     }
+[7m  [0m [91m    ~[0m
+
+    at createTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:863:19)
+    at /home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1379:34
+    at Object.compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1458:13)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+2024-09-15 03:29:09 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/data/services/auth.service.ts[0m:[93m11[0m:[93m48[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m11[0m     private forgetPassword = database.instance.;
+[7m  [0m [91m                                               ~[0m
+[96msrc/data/services/auth.service.ts[0m:[93m37[0m:[93m5[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m37[0m     }
+[7m  [0m [91m    ~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/data/services/auth.service.ts[0m:[93m11[0m:[93m48[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m11[0m     private forgetPassword = database.instance.;
+[7m  [0m [91m                                               ~[0m
+[96msrc/data/services/auth.service.ts[0m:[93m37[0m:[93m5[0m - [91merror[0m[90m TS1003: [0mIdentifier expected.
+
+[7m37[0m     }
+[7m  [0m [91m    ~[0m
+
+    at createTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:859:12)
+    at reportTSError (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:863:19)
+    at /home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1379:34
+    at Object.compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1458:13)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)

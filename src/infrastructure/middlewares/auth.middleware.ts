@@ -1,5 +1,9 @@
 import { Action } from "routing-controllers";
 import { parseJwt } from "../common/jwt";
+import database from "@config/database";
+
+const sessionModel = database.instance.session;
+
 
 export const getAuthorization = (req: any) => {
   const header = req.header("Authorization");
@@ -12,18 +16,26 @@ export const AuthMiddleware = async (
   action: Action,
   roles: string[],
 ): Promise<boolean> => {
+
   try {
     const req = action.request;
     const Authorization = getAuthorization(req);
 
     if (Authorization) {
-      const { id, email, firm_id, firm_membership_id, role } =
+      const { id, name, email, role } =
         parseJwt(Authorization);
+
+      const session = await sessionModel.findUnique({
+        where: { sessionToken: Authorization },
+      });
+
+      if (!session || new Date(session.expires).getTime() < Date.now()) {
+        return false;
+      }
       action.request.user = {
         id,
+        name,
         email,
-        firm_id,
-        firm_membership_id,
         role,
       };
 

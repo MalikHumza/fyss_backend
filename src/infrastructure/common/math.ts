@@ -9,10 +9,13 @@ function toRoundMath(num: number, precision: number) {
 
 export function formatAmount(amount: number | null) {
   if (amount === null) {
-    return '';
+    return "";
   }
 
   const fixedAmount = toRoundMath(amount, 2);
 
-  return Number(fixedAmount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return Number(fixedAmount).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 }

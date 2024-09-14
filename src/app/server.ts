@@ -4,9 +4,6 @@ import { HealthCheckController } from "@infrastructure/controllers/health_check.
 
 ValidateEnv();
 
-const app = new App([
-    HealthCheckController
-]);
-
+const app = new App([HealthCheckController]);
 
 app.listen();

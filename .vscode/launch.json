@@ -1,18 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-
-      {
-        "type": "node-terminal",
-        "request": "launch",
-        "name": "Start Dev Server",
-        "command": "yarn run dev"
-      },
-      {
-        "type": "node-terminal",
-        "request": "launch",
-        "name": "Run Production",
-        "command": "yarn run production"
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Start Dev Server",
+      "command": "yarn run dev"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Run Production",
+      "command": "yarn run production"
+    }
+  ]
+}

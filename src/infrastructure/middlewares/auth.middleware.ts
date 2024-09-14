@@ -1,20 +1,24 @@
-import { Action } from 'routing-controllers';
-import { parseJwt } from '../common/jwt';
+import { Action } from "routing-controllers";
+import { parseJwt } from "../common/jwt";
 
 export const getAuthorization = (req: any) => {
-  const header = req.header('Authorization');
-  if (header) return header.split('Bearer ')[1];
+  const header = req.header("Authorization");
+  if (header) return header.split("Bearer ")[1];
 
   return null;
 };
 
-export const AuthMiddleware = async (action: Action, roles: string[]): Promise<boolean> => {
+export const AuthMiddleware = async (
+  action: Action,
+  roles: string[],
+): Promise<boolean> => {
   try {
     const req = action.request;
     const Authorization = getAuthorization(req);
 
     if (Authorization) {
-      const { id, email, firm_id, firm_membership_id, role } = parseJwt(Authorization);
+      const { id, email, firm_id, firm_membership_id, role } =
+        parseJwt(Authorization);
       action.request.user = {
         id,
         email,

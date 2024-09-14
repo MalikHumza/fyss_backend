@@ -1,5 +1,3 @@
-class FuzzySearch {
-  
-}
+class FuzzySearch {}
 
 export default FuzzySearch;

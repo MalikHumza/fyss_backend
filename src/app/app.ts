@@ -1,15 +1,15 @@
-import hpp from 'hpp';
-import 'reflect-metadata';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import express from 'express';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import { useExpressServer} from 'routing-controllers';
-import { logger, stream } from '../infrastructure/common/logger';
-import { AuthMiddleware } from '../infrastructure/middlewares/auth.middleware';
-import { ErrorMiddleware } from '../infrastructure/middlewares/error.middleware';
-import { CREDENTIALS, LOG_FORMAT, NODE_ENV, PORT } from '../config/environment';
+import hpp from "hpp";
+import "reflect-metadata";
+import morgan from "morgan";
+import helmet from "helmet";
+import express from "express";
+import bodyParser from "body-parser";
+import compression from "compression";
+import { useExpressServer } from "routing-controllers";
+import { logger, stream } from "../infrastructure/common/logger";
+import { AuthMiddleware } from "../infrastructure/middlewares/auth.middleware";
+import { ErrorMiddleware } from "../infrastructure/middlewares/error.middleware";
+import { CREDENTIALS, LOG_FORMAT, NODE_ENV, PORT } from "../config/environment";
 
 export class App {
   public app: express.Application;
@@ -18,7 +18,7 @@ export class App {
 
   constructor(Controllers: Function[]) {
     this.app = express();
-    this.env = NODE_ENV || 'development';
+    this.env = NODE_ENV || "development";
     this.port = PORT || 3000;
 
     this.initializeMiddlewares();
@@ -43,11 +43,11 @@ export class App {
   private initializeRoutes(controllers: Function[]) {
     useExpressServer(this.app, {
       cors: {
-        origin: '*',
+        origin: "*",
         credentials: CREDENTIALS,
       },
-      development: NODE_ENV === 'development',
-      routePrefix: '/v1/api',
+      development: NODE_ENV === "development",
+      routePrefix: "/v1/api",
       controllers: controllers,
       defaultErrorHandler: false,
       authorizationChecker: AuthMiddleware,
@@ -69,41 +69,41 @@ export class App {
     );
   }
 
-//   private initializeSwagger(controllers: Function[]) {
-//     const schemas = validationMetadatasToSchemas({
-//       classTransformerMetadataStorage: defaultMetadataStorage,
-//       refPointerPrefix: '#/components/schemas/',
-//     });
+  //   private initializeSwagger(controllers: Function[]) {
+  //     const schemas = validationMetadatasToSchemas({
+  //       classTransformerMetadataStorage: defaultMetadataStorage,
+  //       refPointerPrefix: '#/components/schemas/',
+  //     });
 
-//     const routingControllersOptions = {
-//       controllers: controllers,
-//       routePrefix: '/v1/api',
-//     };
+  //     const routingControllersOptions = {
+  //       controllers: controllers,
+  //       routePrefix: '/v1/api',
+  //     };
 
-//     const storage = getMetadataArgsStorage();
-//     const spec = routingControllersToSpec(storage, routingControllersOptions, {
-//       components: {
-//         schemas,
-//         securitySchemes: {
-//           basicAuth: {
-//             scheme: 'basic',
-//             type: 'http',
-//           },
-//         },
-//       },
-//       info: {
-//         version: pkg.version,
-//         title: `SeekInvest Backend API - ENV: ${NODE_ENV}`,
-//         description: 'SeekInvest Backend API generated with `routing-controllers-openapi`',
-//       },
-//     });
+  //     const storage = getMetadataArgsStorage();
+  //     const spec = routingControllersToSpec(storage, routingControllersOptions, {
+  //       components: {
+  //         schemas,
+  //         securitySchemes: {
+  //           basicAuth: {
+  //             scheme: 'basic',
+  //             type: 'http',
+  //           },
+  //         },
+  //       },
+  //       info: {
+  //         version: pkg.version,
+  //         title: `SeekInvest Backend API - ENV: ${NODE_ENV}`,
+  //         description: 'SeekInvest Backend API generated with `routing-controllers-openapi`',
+  //       },
+  //     });
 
-//     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
-//   }
+  //     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
+  //   }
 
   private initializeErrorHandling() {
     this.app.use((err, req, res, next) => {
-        next(err);
+      next(err);
     });
     this.app.use(ErrorMiddleware);
   }

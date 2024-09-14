@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/home/malik/Desktop/personal_project/fyss_backend/logs/debug/.eea9a94ebe0b4c63c1c0978dfc5a9c26e38b2f59-audit.json",
+    "files": [
+        {
+            "date": 1726340237179,
+            "name": "/home/malik/Desktop/personal_project/fyss_backend/logs/debug/2024-09-14.log",
+            "hash": "68c5816943d519360210005e3c5fbd644eee239a6e0c8fc4258b091670dcab3a"
+        },
+        {
+            "date": 1726341760351,
+            "name": "/home/malik/Desktop/personal_project/fyss_backend/logs/debug/2024-09-15.log",
+            "hash": "f870ac98b256a4c30db592b621c0d7f55e5f151a3618bc8fa07b9b272fe6d321"
+        }
+    ],
+    "hashType": "sha256"
+}

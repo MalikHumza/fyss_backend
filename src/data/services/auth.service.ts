@@ -2,15 +2,14 @@ import database from "@config/database";
 import { SignUpDTO } from "@data/dtos/auth/signup.dto";
 import { Service } from "typedi";
 import * as bcrypt from 'bcryptjs';
-
 @Service()
 export class AuthService {
-    private user = database.instance.user;
+    private auth = database.instance.user;
     private session = database.instance.session;
 
     async createUser(data: SignUpDTO) {
         const hashedPassword = await bcrypt.hash(data.password, 10);
-        return this.user.create({
+        return this.auth.create({
             data: {
                 email: data.email,
                 hashedPassword: hashedPassword,
@@ -30,14 +29,25 @@ export class AuthService {
         )
     }
 
-    async forgetPassword(data: { user_id: string, email: string, passowrd: string }) {
-        return this.user.update({
+    resetPassword(data: { user_id: string, email: string, passowrd: string }) {
+        return this.auth.update({
             where: {
                 id: data.user_id,
                 email: data.email,
             },
             data: {
                 hashedPassword: data.passowrd
+            }
+        })
+    }
+
+    forgotPassword(data: { email: string, password: string }) {
+        return this.auth.update({
+            where: {
+                email: data.email,
+            },
+            data: {
+                hashedPassword: data.password
             }
         })
     }

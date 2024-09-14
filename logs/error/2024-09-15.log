@@ -108,3 +108,44 @@ TSError: ⨯ Unable to compile TypeScript:
     at Module.load (node:internal/modules/cjs/loader:1288:32)
     at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
     at Module.require (node:internal/modules/cjs/loader:1311:19)
+2024-09-15 04:02:58 error: uncaughtException: Cannot find module '@domain/usecases/auth/forgot_password'
+Require stack:
+- /home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts
+- /home/malik/Desktop/personal_project/fyss_backend/src/app/server.ts
+Error: Cannot find module '@domain/usecases/auth/forgot_password'
+Require stack:
+- /home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts
+- /home/malik/Desktop/personal_project/fyss_backend/src/app/server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (/home/malik/Desktop/personal_project/fyss_backend/node_modules/@cspotcode/source-map-support/source-map-support.js:811:30)
+    at Function.Module._resolveFilename (/home/malik/Desktop/personal_project/fyss_backend/node_modules/tsconfig-paths/src/register.ts:115:36)
+    at Function.Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (/home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+2024-09-15 04:03:03 error: uncaughtException: Cannot find module '@domain/usecases/auth/forgot_password'
+Require stack:
+- /home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts
+- /home/malik/Desktop/personal_project/fyss_backend/src/app/server.ts
+Error: Cannot find module '@domain/usecases/auth/forgot_password'
+Require stack:
+- /home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts
+- /home/malik/Desktop/personal_project/fyss_backend/src/app/server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (/home/malik/Desktop/personal_project/fyss_backend/node_modules/@cspotcode/source-map-support/source-map-support.js:811:30)
+    at Function.Module._resolveFilename (/home/malik/Desktop/personal_project/fyss_backend/node_modules/tsconfig-paths/src/register.ts:115:36)
+    at Function.Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at require (node:internal/modules/helpers:179:18)
+    at Object.<anonymous> (/home/malik/Desktop/personal_project/fyss_backend/src/infrastructure/controllers/auth.controller.ts:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module.m._compile (/home/malik/Desktop/personal_project/fyss_backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+2024-09-15 04:34:54 error: [PATCH] /v1/api/auth/forgot-password >> StatusCode:: 400, Message:: Invalid User
+2024-09-15 04:35:02 error: [PATCH] /v1/api/auth/forgot-password >> StatusCode:: 500, Message:: Unexpected token 'u', ..." "email": user@maili"... is not valid JSON
+2024-09-15 04:35:30 error: [POST] /v1/api/auth/signup >> StatusCode:: 400, Message:: User with this email already exist!
+2024-09-15 04:35:37 error: [POST] /v1/api/auth/sign-in >> StatusCode:: 400, Message:: Invalid Password
+2024-09-15 04:36:02 error: [POST] /v1/api/auth/sign-in >> StatusCode:: 500, Message:: this.authService.loginUser is not a function

@@ -10,4 +10,5 @@ export const {
   ENVIRONMENT,
   LOG_FORMAT,
   FRONTEND_APPLICATION_URL,
+  JWT_KEY,
 } = process.env;

@@ -3,15 +3,15 @@ import { Service } from "typedi";
 
 @Service()
 export class ResetPasswordDTO {
-    @IsEmail()
-    @IsNotEmpty()
-    readonly email: string;
+  @IsEmail()
+  @IsNotEmpty()
+  readonly email: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly old_password: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly old_password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly current_password: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly current_password: string;
 }

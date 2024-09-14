@@ -7,17 +7,17 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class SignUpUseCase {
-    @Inject()
-    private authService: AuthService;
-    @Inject()
-    private userService: UserService;
+  @Inject()
+  private authService: AuthService;
+  @Inject()
+  private userService: UserService;
 
-    public async call(data: SignUpDTO) {
-        const user = await this.userService.findUser(data.email);
-        if (!user) {
-            const result = await this.authService.createUser(data);
-            return new HttpResponse(result, false);
-        }
-        throw new HttpError(400, 'User with this email already exist!')
+  public async call(data: SignUpDTO) {
+    const user = await this.userService.findUser(data.email);
+    if (!user) {
+      const result = await this.authService.createUser(data);
+      return new HttpResponse(result, false);
     }
+    throw new HttpError(400, "User with this email already exist!");
+  }
 }

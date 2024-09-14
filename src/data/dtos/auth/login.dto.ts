@@ -3,11 +3,11 @@ import { Service } from "typedi";
 
 @Service()
 export class LoginDTO {
-    @IsEmail()
-    @IsNotEmpty()
-    readonly email: string;
+  @IsEmail()
+  @IsNotEmpty()
+  readonly email: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly password: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly password: string;
 }

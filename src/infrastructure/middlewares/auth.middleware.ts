@@ -4,7 +4,6 @@ import database from "@config/database";
 
 const sessionModel = database.instance.session;
 
-
 export const getAuthorization = (req: any) => {
   const header = req.header("Authorization");
   if (header) return header.split("Bearer ")[1];
@@ -16,14 +15,12 @@ export const AuthMiddleware = async (
   action: Action,
   roles: string[],
 ): Promise<boolean> => {
-
   try {
     const req = action.request;
     const Authorization = getAuthorization(req);
 
     if (Authorization) {
-      const { id, name, email, role } =
-        parseJwt(Authorization);
+      const { id, name, email, role } = parseJwt(Authorization);
 
       const session = await sessionModel.findUnique({
         where: { sessionToken: Authorization },

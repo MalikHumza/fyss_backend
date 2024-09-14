@@ -5,9 +5,6 @@ import { AuthController } from "@infrastructure/controllers/auth.controller";
 
 ValidateEnv();
 
-const app = new App([
-    AuthController,
-    HealthCheckController
-]);
+const app = new App([AuthController, HealthCheckController]);
 
 app.listen();

@@ -1,4 +1,5 @@
 import database from "@config/database";
+import { UpdateProfileDTO } from "@data/dtos/user/update_profile.dto";
 import { Service } from "typedi";
 
 @Service()
@@ -9,5 +10,17 @@ export class UserService {
     return this.user.findUnique({
       where: { email },
     });
+  }
+
+  updateUser(user_id: string, data: UpdateProfileDTO) {
+    return this.user.update({
+      where: {
+        id: user_id,
+        email: data.email,
+      },
+      data: {
+        name: data.name
+      }
+    })
   }
 }

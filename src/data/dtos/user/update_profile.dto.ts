@@ -11,7 +11,7 @@ export class UpdateProfileDTO {
   @IsNotEmpty()
   readonly name: string;
 
-//   @IsString()
-//   @IsNotEmpty()
-//   readonly image: string;  //TODO: storge server needed
+  //   @IsString()
+  //   @IsNotEmpty()
+  //   readonly image: string;  //TODO: storge server needed
 }

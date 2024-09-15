@@ -19,8 +19,8 @@ export class UserService {
         email: data.email,
       },
       data: {
-        name: data.name
-      }
-    })
+        name: data.name,
+      },
+    });
   }
 }

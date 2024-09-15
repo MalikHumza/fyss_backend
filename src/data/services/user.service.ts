@@ -12,6 +12,14 @@ export class UserService {
     });
   }
 
+  findUserWithId(user_id: string) {
+    return this.user.findUnique({
+      where: {
+        id: user_id
+      }
+    })
+  }
+
   updateUser(user_id: string, data: UpdateProfileDTO) {
     return this.user.update({
       where: {

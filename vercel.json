@@ -5,7 +5,8 @@
         "src": "src/app/server.ts",
         "use": "@vercel/node",
         "config": {
-          "maxLambdaSize": "50mb"
+          "maxLambdaSize": "50mb",
+          "includeFiles": ["src/**/*.ts"]
         }
       }
     ],

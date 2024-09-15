@@ -7,6 +7,9 @@ COPY . ./app
 # Work to Dir
 WORKDIR /app
 
+# Copy the entire application directory
+COPY . .
+
 # Install the project dependencies using Yarn
 RUN yarn install
 

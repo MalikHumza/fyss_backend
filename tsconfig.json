@@ -23,12 +23,12 @@
     "importHelpers": true,
     "baseUrl": "./src",
     "paths": {
-      "@app": ["./app"],
-      "@config/*": ["./config/*"],
-      "@core/*": ["./core/*"],
-      "@data/*": ["./data/*"],
-      "@domain/*": ["./domain/*"],
-      "@infrastructure/*": ["./infrastructure/*"]
+      "@app/*": ["app/*"],
+      "@config/*": ["config/*"],
+      "@core/*": ["core/*"],
+      "@data/*": ["data/*"],
+      "@domain/*": ["domain/*"],
+      "@infrastructure/*": ["infrastructure/*"]
     }
   },
   "include": ["./src/**/*.ts", "./src/**/*.json", ".env"],

@@ -9,17 +9,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
+enum Roles {
   ADMIN
-  STUDENTS
   STAFF
+  STUDENT
 }
 
 model User {
   id             String   @id @default(cuid())
   name           String?
   email          String   @unique
-  role           Role     @default(STUDENTS)
+  role           Roles    @default(STUDENT)
   image          String?
   hashedPassword String
   createdAt      DateTime @default(now())

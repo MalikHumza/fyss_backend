@@ -1,13 +1,12 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'STAFF');
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'STUDENTS', 'STAFF');
 
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'USER',
-    "emailVerified" TIMESTAMP(3),
+    "role" "Role" NOT NULL DEFAULT 'STUDENTS',
     "image" TEXT,
     "hashedPassword" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -11,7 +11,7 @@ datasource db {
 
 enum Role {
   ADMIN
-  USER
+  STUDENTS
   STAFF
 }
 
@@ -19,7 +19,7 @@ model User {
   id             String   @id @default(cuid())
   name           String?
   email          String   @unique
-  role           Role     @default(USER)
+  role           Role     @default(STUDENTS)
   image          String?
   hashedPassword String
   createdAt      DateTime @default(now())

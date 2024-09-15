@@ -1,6 +1,6 @@
 import { Action } from "routing-controllers";
 import { parseJwt } from "../common/jwt";
-import database from "@config/database";
+import database from "../../config/database";
 
 const sessionModel = database.instance.session;
 

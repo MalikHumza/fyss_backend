@@ -3,14 +3,13 @@ import path from "path";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
 import { LOG_DIR, NODE_ENV } from "../../config/environment";
-import * as os from 'os';
 
 // logs dir
-const isServerless = NODE_ENV === 'development';
-const logDir = isServerless ? path.join(os.tmpdir(), LOG_DIR) : path.join(__dirname, LOG_DIR);
+const isServerless = NODE_ENV === 'development'// Handle serverless environments like Vercel
+const logDir = isServerless ? path.join('/tmp', LOG_DIR) : path.join(__dirname, LOG_DIR);
 
 if (!existsSync(logDir)) {
-  mkdirSync(logDir);
+  mkdirSync(logDir, {recursive: true});
 }
 
 // Define log format

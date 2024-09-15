@@ -6,17 +6,32 @@
         "use": "@vercel/node",
         "config": {
           "maxLambdaSize": "50mb",
-          "includeFiles": ["src/**/*.ts"]
+          "includeFiles": ["src/**/*.ts", "prisma/schema.prisma", ".env*"]
         }
       }
     ],
     "outputDirectory": "dist",
+    "build": {
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "commands": [
+      "npx prisma generate",
+      "npm run build"
+    ]
+  },
     "routes": [
       {
         "src": "/(.*)",
         "dest": "/src/app/server.ts"
       }
     ],
+    "functions": {
+    "api/**/*.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
     "env": {
       "ENVIRONMENT": "dev",
       "FRONTEND_APPLICATION_URL": "#",

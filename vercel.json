@@ -1,32 +1,31 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "src/app/server.ts",
-        "use": "@vercel/node",
-        "config": {
-          "maxLambdaSize": "50mb",
-          "includeFiles": ["src/**/*.ts"]
-        }
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/app/server.ts",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": ["src/**/*.ts"]
       }
-    ],
-    "outputDirectory": "dist",
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/src/app/server.ts"
-      }
-    ],
-    "env": {
-      "ENVIRONMENT": "dev",
-      "FRONTEND_APPLICATION_URL": "#",
-      "DATABASE_URL": "postgres://malik:fysspasswordpostgresdb@127.0.0.1:5432/fyss-postgres?schema=public",
-      "JWT_KEY": "abcsdfjkrn124nlnfsfsvjjfbrj",
-      "LOG_FORMAT": "dev",
-      "LOG_DIR": "../../../logs",
-      "ORIGIN": "*",
-      "CREDENTIALS": "true",
-      "PORT": "3000"
     }
+  ],
+  "outputDirectory": "dist",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/src/app/server.ts"
+    }
+  ],
+  "env": {
+    "ENVIRONMENT": "dev",
+    "FRONTEND_APPLICATION_URL": "#",
+    "DATABASE_URL": "postgres://malik:fysspasswordpostgresdb@127.0.0.1:5432/fyss-postgres?schema=public",
+    "JWT_KEY": "abcsdfjkrn124nlnfsfsvjjfbrj",
+    "LOG_FORMAT": "dev",
+    "LOG_DIR": "../../../logs",
+    "ORIGIN": "*",
+    "CREDENTIALS": "true",
+    "PORT": "3000"
   }
-  
+}

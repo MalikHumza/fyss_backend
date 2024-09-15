@@ -1,0 +1,21 @@
+# NodeJS Version 20
+FROM node:20-alpine
+
+# Copy Dir
+COPY . ./app
+
+# Work to Dir
+WORKDIR /app
+
+# Install the project dependencies using Yarn
+RUN yarn install
+
+RUN yarn prisma:generate:dev
+
+# Set Env
+ENV NODE_ENV development
+
+EXPOSE 3000
+
+# Cmd script
+CMD ["npm", "run", "start:dev"]

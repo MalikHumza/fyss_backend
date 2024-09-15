@@ -41,6 +41,10 @@ export class LoginUseCase {
     const session = await this.authService.loginUser(sessionToken, user.id);
     const response = {
       token: session.sessionToken,
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
       role: user.role,
     };
     return new HttpResponse(response, false);

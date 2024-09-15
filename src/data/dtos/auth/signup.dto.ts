@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Roles } from "@prisma/client";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 import { Service } from "typedi";
 
@@ -14,5 +14,5 @@ export class SignUpDTO {
 
   @IsString()
   @IsNotEmpty()
-  readonly role: Role;
+  readonly role: Roles
 }

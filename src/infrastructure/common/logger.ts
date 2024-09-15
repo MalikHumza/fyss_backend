@@ -1,13 +1,12 @@
 import { existsSync, mkdirSync } from "fs";
-import path from "path";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
 import { LOG_DIR, NODE_ENV } from "../../config/environment";
 
 const isServerless = NODE_ENV === 'production' || 'preview';
 
-// logs dir
-const logDir = isServerless ? path.join('/tmp', LOG_DIR) : path.join(__dirname, LOG_DIR);
+// Define log directory for local environments; use /tmp for serverless
+const logDir = isServerless ? '/tmp/logs' : `${__dirname}/${LOG_DIR}`;
 
 if (!isServerless && !existsSync(logDir)) {
   mkdirSync(logDir, { recursive: true });

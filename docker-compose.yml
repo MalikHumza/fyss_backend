@@ -24,7 +24,7 @@ services:
     volumes:
       - .:/app
     environment:
-      DATABASE_URL: postgres://malik:fysspasswordpostgresdb@postgres:5432/fyss-postgres?schema=public
+      DATABASE_URL: postgresql://postgres:tZaxUFFvZVxxyWCZSGIHPtAKSqanUsTX@autorack.proxy.rlwy.net:15294/railway
     restart: always
     networks:
       - backend

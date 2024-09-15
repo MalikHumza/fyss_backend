@@ -1,11 +1,13 @@
 import { existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import path from "path";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
-import { LOG_DIR } from "../../config/environment";
+import { LOG_DIR, NODE_ENV } from "../../config/environment";
+import * as os from 'os';
 
 // logs dir
-const logDir: string = join(__dirname, LOG_DIR);
+const isServerless = NODE_ENV === 'development';
+const logDir = isServerless ? path.join(os.tmpdir(), LOG_DIR) : path.join(__dirname, LOG_DIR);
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);

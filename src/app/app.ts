@@ -102,7 +102,7 @@ export class App {
   //   }
 
   private initializeErrorHandling() {
-    this.app.use((err, req, res, next) => {
+    this.app.use((err, _, __, next) => {
       next(err);
     });
     this.app.use(ErrorMiddleware);

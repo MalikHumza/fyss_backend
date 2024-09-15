@@ -1,4 +1,4 @@
-import { ValidateEnv } from "@infrastructure/common/validateEnv";
+import { ValidateEnv } from "../infrastructure/common/validateEnv";
 import { App } from "./app";
 import { HealthCheckController } from "@infrastructure/controllers/health_check.controller";
 import { AuthController } from "@infrastructure/controllers/auth.controller";

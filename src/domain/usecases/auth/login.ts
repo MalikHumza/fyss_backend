@@ -20,6 +20,7 @@ export class LoginUseCase {
     if (!user) {
       throw new HttpError(400, "User not found");
     }
+
     const isPasswordValid = await bcrypt.compare(
       data.password,
       user.hashedPassword,
@@ -27,6 +28,9 @@ export class LoginUseCase {
     if (!isPasswordValid) {
       throw new HttpError(400, "Invalid Password");
     }
+
+    let response;
+
     const sessionToken = jwt.sign(
       {
         id: user.id,
@@ -38,9 +42,24 @@ export class LoginUseCase {
       { expiresIn: "1d" },
     );
 
-    const session = await this.authService.loginUser(sessionToken, user.id);
-    const response = {
-      token: session.sessionToken,
+    const isSession = await this.authService.findTokenByUserId(user.id);
+    if (!isSession) {
+      const session = await this.authService.loginUser(sessionToken, user.id);
+      response = {
+        token: session.sessionToken,
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        role: user.role,
+      };
+    }
+    const sessionUpdate = await this.authService.updateUserSession(
+      isSession.id,
+      sessionToken,
+    );
+    response = {
+      token: sessionUpdate.sessionToken,
       id: user.id,
       name: user.name,
       email: user.email,

@@ -18,6 +18,14 @@ export class AuthService {
     });
   }
 
+  findTokenByUserId(user_id: string) {
+    return this.session.findFirst({
+      where: {
+        userId: user_id
+      }
+    })
+  }
+
   loginUser(session_token: string, user_id: string) {
     return this.session.create({
       data: {
@@ -26,6 +34,17 @@ export class AuthService {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       },
     });
+  }
+
+  updateUserSession(id: string, session_token: string) {
+    return this.session.update({
+      where: {
+        id
+      },
+      data: {
+        sessionToken: session_token
+      }
+    })
   }
 
   resetPassword(data: { user_id: string; email: string; passowrd: string }) {
@@ -49,5 +68,13 @@ export class AuthService {
         hashedPassword: data.password,
       },
     });
+  }
+
+  signOutUser(sessionToken: string) {
+    return this.session.delete({
+      where: {
+        sessionToken
+      }
+    })
   }
 }

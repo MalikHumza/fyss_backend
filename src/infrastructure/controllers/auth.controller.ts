@@ -16,9 +16,11 @@ import {
   Patch,
   Req,
   Authorized,
+  Delete,
 } from "routing-controllers";
 import { ForgotPasswordUseCase } from "@domain/usecases/auth/forgot_password";
 import { ResetPasswordDTO } from "@data/dtos/auth/forgot_password.dto";
+import { SignOutUserUseCase } from "@domain/usecases/auth/signout_user";
 
 @Controller("/auth")
 export class AuthController {
@@ -26,6 +28,7 @@ export class AuthController {
   private loginUseCase = Container.get(LoginUseCase);
   private resetPasswordUseCase = Container.get(ResetPasswordUseCase);
   private forgotPasswordUseCase = Container.get(ForgotPasswordUseCase);
+  private signOutUserUseCase = Container.get(SignOutUserUseCase);
 
   @Post("/signup")
   @UseBefore(ValidationMiddleware(SignUpDTO))
@@ -55,5 +58,13 @@ export class AuthController {
   @HttpCode(200)
   forgotPassword(@Body() data: LoginDTO) {
     return this.forgotPasswordUseCase.call(data);
+  }
+
+  @Delete("/signout")
+  @Authorized()
+  @UseBefore(CheckTokenExpiry)
+  @HttpCode(200)
+  signOutUser(@Req() req: RequestWithUser) {
+    return this.signOutUserUseCase.call(req);
   }
 }

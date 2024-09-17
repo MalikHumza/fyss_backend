@@ -21,9 +21,9 @@ export class AuthService {
   findTokenByUserId(user_id: string) {
     return this.session.findFirst({
       where: {
-        userId: user_id
-      }
-    })
+        userId: user_id,
+      },
+    });
   }
 
   loginUser(session_token: string, user_id: string) {
@@ -39,12 +39,12 @@ export class AuthService {
   updateUserSession(id: string, session_token: string) {
     return this.session.update({
       where: {
-        id
+        id,
       },
       data: {
-        sessionToken: session_token
-      }
-    })
+        sessionToken: session_token,
+      },
+    });
   }
 
   resetPassword(data: { user_id: string; email: string; passowrd: string }) {
@@ -73,8 +73,8 @@ export class AuthService {
   signOutUser(sessionToken: string) {
     return this.session.delete({
       where: {
-        sessionToken
-      }
-    })
+        sessionToken,
+      },
+    });
   }
 }

@@ -54,7 +54,10 @@ export class LoginUseCase {
         role: user.role,
       };
     }
-    const sessionUpdate = await this.authService.updateUserSession(isSession.id, sessionToken);
+    const sessionUpdate = await this.authService.updateUserSession(
+      isSession.id,
+      sessionToken,
+    );
     response = {
       token: sessionUpdate.sessionToken,
       id: user.id,

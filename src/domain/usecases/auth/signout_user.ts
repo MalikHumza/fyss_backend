@@ -5,15 +5,15 @@ import { RequestWithUser } from "@data/interfaces/request.interface";
 
 @Service()
 export class SignOutUserUseCase {
-    @Inject()
-    private authService: AuthService;
+  @Inject()
+  private authService: AuthService;
 
-    public async call(req: RequestWithUser) {
-        const header = req.header("Authorization");
-        const sessionToken = header.split("Bearer ")[1];
+  public async call(req: RequestWithUser) {
+    const header = req.header("Authorization");
+    const sessionToken = header.split("Bearer ")[1];
 
-        await this.authService.signOutUser(sessionToken)
-        
-        return new HttpResponse(true);
-    }
+    await this.authService.signOutUser(sessionToken);
+
+    return new HttpResponse(true);
+  }
 }

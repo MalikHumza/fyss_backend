@@ -10,7 +10,11 @@ export class UpdateProfileUseCase {
   @Inject()
   private userService: UserService;
 
-  public async call(req: RequestWithUser, data: UpdateProfileDTO, file?: Express.Multer.File) {
+  public async call(
+    req: RequestWithUser,
+    data: UpdateProfileDTO,
+    file?: Express.Multer.File,
+  ) {
     await FormValidationMiddleware(data);
     const user_id = req.user.id;
     const user_email = req.user.email;

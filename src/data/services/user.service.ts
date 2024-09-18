@@ -31,7 +31,7 @@ export class UserService {
         dob: data.dob ?? null,
         phone_number: data.phone_number ?? null,
         gender: data.gender ?? null,
-        image: data.image ?? null
+        image: data.image ?? null,
       },
     });
   }

@@ -31,7 +31,11 @@ export class UserController {
 
   @Put("/edit-profile")
   @HttpCode(200)
-  updateProfile(@Req() req: RequestWithUser, @Body() data: UpdateProfileDTO, @UploadedFile('image') file?: Express.Multer.File) {
+  updateProfile(
+    @Req() req: RequestWithUser,
+    @Body() data: UpdateProfileDTO,
+    @UploadedFile("image") file?: Express.Multer.File,
+  ) {
     return this.updateProfileUseCase.call(req, data, file);
   }
 }

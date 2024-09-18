@@ -50,6 +50,9 @@ export class LoginUseCase {
         id: user.id,
         name: user.name,
         email: user.email,
+        dob: user.dob,
+        phone_number: user.phone_number,
+        gender: user.gender,
         image: user.image,
         role: user.role,
       };
@@ -63,6 +66,9 @@ export class LoginUseCase {
       id: user.id,
       name: user.name,
       email: user.email,
+      dob: user.dob,
+      phone_number: user.phone_number,
+      gender: user.gender,
       image: user.image,
       role: user.role,
     };

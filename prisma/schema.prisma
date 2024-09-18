@@ -16,14 +16,17 @@ enum Roles {
 }
 
 model User {
-  id             String   @id @default(cuid())
+  id             String    @id @default(cuid())
   name           String?
-  email          String   @unique
-  role           Roles    @default(STUDENT)
+  email          String    @unique
+  dob            DateTime?
+  phone_number   String?
+  gender         String?
+  role           Roles     @default(STUDENT)
   image          String?
   hashedPassword String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   // User has many sessions
   sessions Session[]

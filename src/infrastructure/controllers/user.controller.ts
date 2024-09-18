@@ -3,7 +3,6 @@ import { RequestWithUser } from "@data/interfaces/request.interface";
 import { GetProfileUseCase } from "@domain/usecases/user/get_profile";
 import { UpdateProfileUseCase } from "@domain/usecases/user/update_profile";
 import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middleware";
-import { ValidationMiddleware } from "@infrastructure/middlewares/validation.middleware";
 import {
   Authorized,
   Body,
@@ -12,6 +11,7 @@ import {
   JsonController,
   Put,
   Req,
+  UploadedFile,
   UseBefore,
 } from "routing-controllers";
 import Container from "typedi";
@@ -30,9 +30,8 @@ export class UserController {
   }
 
   @Put("/edit-profile")
-  @UseBefore(ValidationMiddleware(UpdateProfileDTO))
   @HttpCode(200)
-  updateProfile(@Req() req: RequestWithUser, @Body() data: UpdateProfileDTO) {
-    return this.updateProfileUseCase.call(req, data);
+  updateProfile(@Req() req: RequestWithUser, @Body() data: UpdateProfileDTO, @UploadedFile('image') file?: Express.Multer.File) {
+    return this.updateProfileUseCase.call(req, data, file);
   }
 }

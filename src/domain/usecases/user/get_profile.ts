@@ -15,6 +15,9 @@ export class GetProfileUseCase {
       id: user.id,
       name: user.name,
       email: user.email,
+      dob: user.dob,
+      phone_number: user.phone_number,
+      gender: user.gender,
       role: user.role,
       image: user.image,
     };

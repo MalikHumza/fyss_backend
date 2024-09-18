@@ -20,14 +20,18 @@ export class UserService {
     });
   }
 
-  updateUser(user_id: string, data: UpdateProfileDTO) {
+  updateUser(user_id: string, email: string, data: UpdateProfileDTO) {
     return this.user.update({
       where: {
         id: user_id,
-        email: data.email,
+        email: email,
       },
       data: {
-        name: data.name,
+        name: data.name ?? null,
+        dob: data.dob ?? null,
+        phone_number: data.phone_number ?? null,
+        gender: data.gender ?? null,
+        image: data.image ?? null,
       },
     });
   }

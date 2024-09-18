@@ -1,17 +1,27 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsDate, IsOptional, IsString } from "class-validator";
 import { Service } from "typedi";
 
 @Service()
 export class UpdateProfileDTO {
-  @IsEmail()
-  @IsNotEmpty()
-  readonly email: string;
+  @IsString()
+  @IsOptional()
+  readonly name?: string;
+
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  readonly dob?: Date;
 
   @IsString()
-  @IsNotEmpty()
-  readonly name: string;
+  @IsOptional()
+  readonly phone_number?: string;
 
-  //   @IsString()
-  //   @IsNotEmpty()
-  //   readonly image: string;  //TODO: storge server needed
+  @IsString()
+  @IsOptional()
+  readonly gender?: string;
+
+  @IsString()
+  @IsOptional()
+  readonly image?: string;
 }

@@ -1,5 +1,5 @@
 import { RequestWithUser } from "@data/interfaces/request.interface";
-import { GetSavingsByStudentIdUseCase } from "@domain/usecases/savings/get_savings_by_student_id";
+import { GetActionPlanByStudentIdUseCase } from "@domain/usecases/actionPlan/get_action_plan_by_student_id";
 import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middleware";
 import {
   Authorized,
@@ -11,17 +11,17 @@ import {
 } from "routing-controllers";
 import Container from "typedi";
 
-@JsonController("/savings")
+@JsonController("/action")
 @UseBefore(CheckTokenExpiry)
 @Authorized()
-export class SavingsController {
-  private getSavingsByStudentIdUseCase = Container.get(
-    GetSavingsByStudentIdUseCase,
+export class ActionsPlanController {
+  private getActionPlanByStudentIdUseCase = Container.get(
+    GetActionPlanByStudentIdUseCase,
   );
 
   @Get("/student")
   @HttpCode(200)
-  getSavingsByStudentId(@Req() req: RequestWithUser) {
-    return this.getSavingsByStudentIdUseCase.call(req);
+  getActionPlanByStudentId(@Req() req: RequestWithUser) {
+    return this.getActionPlanByStudentIdUseCase.call(req);
   }
 }

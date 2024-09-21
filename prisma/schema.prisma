@@ -21,6 +21,13 @@ enum ACTION_STATUS {
   COMPLETED
 }
 
+enum QUARTER_MONTHS {
+  JAN_MAR
+  APR_JUN
+  JUL_SEP
+  OCT_DEC
+}
+
 model User {
   id             String   @id @default(cuid())
   name           String?
@@ -34,10 +41,13 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  sessions   Session[]
-  RoomCheck  RoomCheck[]
-  Savings    Savings[]
-  ActionPlan ActionPlan[]
+  sessions    Session[]
+  RoomCheck   RoomCheck[]
+  Savings     Savings[]
+  ActionPlan  ActionPlan[]
+  SupportPlan SupportPlan[]
+  Health      Health[]
+  Rewards     Rewards[]
 }
 
 model Session {
@@ -97,4 +107,56 @@ model ActionPlan {
   user                   User?          @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt              DateTime       @default(now())
   updatedAt              DateTime       @updatedAt
+}
+
+model SupportPlan {
+  id                           String          @id @default(cuid())
+  staff_id                     String?
+  student_id                   String?
+  student_email                String?
+  strengths                    String?
+  area_of_development          String?
+  current_strategy_and_support String?
+  month                        QUARTER_MONTHS?
+  year                         Int?
+  user                         User?           @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt                    DateTime        @default(now())
+  updatedAt                    DateTime        @updatedAt
+}
+
+model Health {
+  id                 String   @id @default(cuid())
+  staff_id           String?
+  staff_name         String?
+  student_id         String?
+  student_email      String?
+  health_issue       String?
+  appointment        Boolean?
+  feedback           String?
+  medication         Boolean?
+  name_of_medication Boolean?
+  from_duration      Int?
+  to_duration        Int?
+  follow_up_date     Int?
+  evidence           Boolean?
+  user               User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Rewards {
+  id            String   @id @default(cuid())
+  staff_id      String?
+  staff_name    String?
+  student_id    String?
+  student_email String?
+  type          String?
+  reason        String?
+  points        Int?
+  reflection    String?
+  notes         String?
+  level         Int?
+  user          User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

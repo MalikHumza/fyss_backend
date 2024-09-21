@@ -30,16 +30,17 @@ model User {
 
   sessions  Session[]
   RoomCheck RoomCheck[]
+  Savings   Savings[]
 }
 
 model Session {
-  id           String     @id @default(cuid())
-  sessionToken String     @unique
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model RoomCheck {
@@ -54,4 +55,20 @@ model RoomCheck {
   user                  User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
+}
+
+model Savings {
+  id             String   @id @default(cuid())
+  staff_id       String?
+  staff_name     String? //Staff name
+  student_id     String?
+  student_name   String?
+  student_email  String?
+  deposited_by   String? //Depositor name
+  recieved_by    String? //Staff name
+  deposit_amount Float?
+  balance        Float?
+  user           User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

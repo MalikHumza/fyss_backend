@@ -6,22 +6,31 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class GetStudentSupportPlanUseCase {
-    @Inject()
-    private supportPlan: SupportPlanService;
+  @Inject()
+  private supportPlan: SupportPlanService;
 
-    public async call(req: RequestWithUser, months?: QUARTER_MONTHS, year?: number) {
-        const { id, email } = req.user;
-        const getPlan = await this.supportPlan.getStudentSupportPlan(id, email, months, year);
-        const response = {
-            id: getPlan.id,
-            student_id: getPlan.student_id,
-            student_email: getPlan.student_email,
-            months,
-            year,
-            strenghts: getPlan.strengths || '',
-            area_of_development: getPlan.area_of_development || '',
-            strategy_and_support: getPlan.current_strategy_and_support || '',
-        };
-        return new HttpResponse(response, false);
-    }
+  public async call(
+    req: RequestWithUser,
+    months?: QUARTER_MONTHS,
+    year?: number,
+  ) {
+    const { id, email } = req.user;
+    const getPlan = await this.supportPlan.getStudentSupportPlan(
+      id,
+      email,
+      months,
+      year,
+    );
+    const response = {
+      id: getPlan.id,
+      student_id: getPlan.student_id,
+      student_email: getPlan.student_email,
+      months,
+      year,
+      strenghts: getPlan.strengths || "",
+      area_of_development: getPlan.area_of_development || "",
+      strategy_and_support: getPlan.current_strategy_and_support || "",
+    };
+    return new HttpResponse(response, false);
+  }
 }

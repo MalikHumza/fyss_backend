@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsDate, IsOptional, IsString } from "class-validator";
+import { IsInt, IsOptional, IsString } from "class-validator";
 import { Service } from "typedi";
 
 @Service()
@@ -8,10 +8,10 @@ export class UpdateProfileDTO {
   @IsOptional()
   readonly name?: string;
 
-  @IsDate()
-  @Type(() => Date)
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
-  readonly dob?: Date;
+  readonly dob?: number;
 
   @IsString()
   @IsOptional()

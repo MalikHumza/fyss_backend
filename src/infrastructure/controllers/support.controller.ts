@@ -25,9 +25,10 @@ export class SupportPlanController {
   @HttpCode(200)
   getStudentSupportPlan(
     @Req() req: RequestWithUser,
-    @QueryParam("month", { required: true }) months: QUARTER_MONTHS,
+    @QueryParam("month", { required: true, type: String })
+    month: QUARTER_MONTHS,
     @QueryParam("year", { required: true }) year: number,
   ) {
-    return this.getStudentSupportPlanUseCase.call(req, months, year);
+    return this.getStudentSupportPlanUseCase.call(req, month, year);
   }
 }

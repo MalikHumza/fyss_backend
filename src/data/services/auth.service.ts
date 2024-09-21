@@ -12,6 +12,7 @@ export class AuthService {
     return this.auth.create({
       data: {
         email: data.email,
+        name: data.name,
         hashedPassword: hashedPassword,
         role: data.role,
       },

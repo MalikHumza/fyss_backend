@@ -27,6 +27,7 @@ export class UpdateProfileUseCase {
       phone_number: user.phone_number,
       gender: user.gender,
       image: user.image,
+      role: user.role,
     };
     return new HttpResponse(response, false);
   }

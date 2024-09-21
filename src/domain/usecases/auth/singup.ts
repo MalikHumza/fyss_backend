@@ -16,7 +16,17 @@ export class SignUpUseCase {
     const user = await this.userService.findUser(data.email);
     if (!user) {
       const result = await this.authService.createUser(data);
-      return new HttpResponse(result, false);
+      const response = {
+        id: result.id,
+        name: result.name,
+        email: result.email,
+        dob: result.dob,
+        phone_number: result.phone_number,
+        gender: result.gender,
+        role: result.role,
+        image: result.image,
+      };
+      return new HttpResponse(response, false);
     }
     throw new HttpError(400, "User with this email already exist!");
   }

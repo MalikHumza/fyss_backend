@@ -7,6 +7,11 @@ import { RoomCheckController } from "@infrastructure/controllers/room_check.cont
 
 ValidateEnv();
 
-const app = new App([AuthController, UserController, RoomCheckController, HealthCheckController]);
+const app = new App([
+  AuthController,
+  UserController,
+  RoomCheckController,
+  HealthCheckController,
+]);
 
 app.listen();

@@ -9,7 +9,6 @@ import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middl
 import { ValidationMiddleware } from "@infrastructure/middlewares/validation.middleware";
 import {
   HttpCode,
-  Controller,
   Post,
   Body,
   UseBefore,
@@ -17,12 +16,13 @@ import {
   Req,
   Authorized,
   Delete,
+  JsonController,
 } from "routing-controllers";
 import { ForgotPasswordUseCase } from "@domain/usecases/auth/forgot_password";
 import { ResetPasswordDTO } from "@data/dtos/auth/forgot_password.dto";
 import { SignOutUserUseCase } from "@domain/usecases/auth/signout_user";
 
-@Controller("/auth")
+@JsonController('/auth')
 export class AuthController {
   private signUpUseCase = Container.get(SignUpUseCase);
   private loginUseCase = Container.get(LoginUseCase);
@@ -30,39 +30,39 @@ export class AuthController {
   private forgotPasswordUseCase = Container.get(ForgotPasswordUseCase);
   private signOutUserUseCase = Container.get(SignOutUserUseCase);
 
-  @Post("/signup")
+  @Post('/signup')
   @UseBefore(ValidationMiddleware(SignUpDTO))
   @HttpCode(201)
   signup(@Body() data: SignUpDTO) {
     return this.signUpUseCase.call(data);
   }
 
-  @Post("/sign-in")
+  @Post('/sign-in')
   @UseBefore(ValidationMiddleware(LoginDTO))
   @HttpCode(201)
   login(@Body() data: LoginDTO) {
     return this.loginUseCase.call(data);
   }
 
-  @Patch("/reset-password")
-  @Authorized()
+  @Patch('/reset-password')
   @UseBefore(CheckTokenExpiry)
+  @Authorized()
   @UseBefore(ValidationMiddleware(ResetPasswordDTO))
   @HttpCode(200)
   resetPassword(@Req() req: RequestWithUser, @Body() data: ResetPasswordDTO) {
     return this.resetPasswordUseCase.call(req, data);
   }
 
-  @Patch("/forgot-password")
+  @Patch('/forgot-password')
   @UseBefore(ValidationMiddleware(LoginDTO))
   @HttpCode(200)
   forgotPassword(@Body() data: LoginDTO) {
     return this.forgotPasswordUseCase.call(data);
   }
 
-  @Delete("/signout")
-  @Authorized()
+  @Delete('/signout')
   @UseBefore(CheckTokenExpiry)
+  @Authorized()
   @HttpCode(200)
   signOutUser(@Req() req: RequestWithUser) {
     return this.signOutUserUseCase.call(req);

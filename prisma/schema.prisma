@@ -15,6 +15,12 @@ enum Roles {
   STUDENT
 }
 
+enum ACTION_STATUS {
+  SENT
+  IN_PROGRESS
+  COMPLETED
+}
+
 model User {
   id             String   @id @default(cuid())
   name           String?
@@ -28,9 +34,10 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  sessions  Session[]
-  RoomCheck RoomCheck[]
-  Savings   Savings[]
+  sessions   Session[]
+  RoomCheck  RoomCheck[]
+  Savings    Savings[]
+  ActionPlan ActionPlan[]
 }
 
 model Session {
@@ -71,4 +78,23 @@ model Savings {
   user           User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model ActionPlan {
+  id                     String         @id @default(cuid())
+  staff_id               String?
+  staff_name             String? //Staff name
+  student_id             String?
+  student_email          String?
+  key_need               String?
+  action_to_be_completed String?
+  success_metrics        String?
+  due_date               Int?
+  assigned_to            String?
+  review                 String?
+  start_date             Int?
+  status                 ACTION_STATUS?
+  user                   User?          @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
 }

@@ -16,25 +16,25 @@ import {
 } from "routing-controllers";
 import Container from "typedi";
 
-@JsonController("/user")
-@Authorized()
+@JsonController('/user')
 @UseBefore(CheckTokenExpiry)
+@Authorized()
 export class UserController {
   private updateProfileUseCase = Container.get(UpdateProfileUseCase);
   private getProfileUseCase = Container.get(GetProfileUseCase);
 
-  @Get("/")
+  @Get('/')
   @HttpCode(200)
   getProfile(@Req() req: RequestWithUser) {
     return this.getProfileUseCase.call(req);
   }
 
-  @Put("/edit-profile")
+  @Put('/edit-profile')
   @HttpCode(200)
   updateProfile(
     @Req() req: RequestWithUser,
     @Body() data: UpdateProfileDTO,
-    @UploadedFile("image") file?: Express.Multer.File,
+    @UploadedFile('image') file?: Express.Multer.File,
   ) {
     return this.updateProfileUseCase.call(req, data, file);
   }

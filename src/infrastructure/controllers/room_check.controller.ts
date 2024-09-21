@@ -11,15 +11,13 @@ import {
 } from "routing-controllers";
 import Container from "typedi";
 
-@JsonController("/room-check")
-@Authorized()
+@JsonController('/room-check')
 @UseBefore(CheckTokenExpiry)
+@Authorized()
 export class RoomCheckController {
-  private getRoomCheckByStudentIdUseCase = Container.get(
-    GetRoomCheckByStudentIdUseCase,
-  );
+  private getRoomCheckByStudentIdUseCase = Container.get(GetRoomCheckByStudentIdUseCase);
 
-  @Get("/")
+  @Get('/student')
   @HttpCode(200)
   getRoomCheckByStudentId(@Req() req: RequestWithUser) {
     return this.getRoomCheckByStudentIdUseCase.call(req);

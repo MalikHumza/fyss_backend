@@ -25,7 +25,7 @@ export class SignUpUseCase {
         gender: result.gender,
         role: result.role,
         image: result.image,
-      }
+      };
       return new HttpResponse(response, false);
     }
     throw new HttpError(400, "User with this email already exist!");

@@ -8,6 +8,7 @@ import { SavingsController } from "@infrastructure/controllers/savings.controlle
 import { ActionsPlanController } from "@infrastructure/controllers/action_plan.controller";
 import { SupportPlanController } from "@infrastructure/controllers/support.controller";
 import { StudentHealthCheckController } from "@infrastructure/controllers/student_health.controller";
+import { RewardsController } from "@infrastructure/controllers/rewards.controller";
 
 ValidateEnv();
 
@@ -19,6 +20,7 @@ const app = new App([
   ActionsPlanController,
   SupportPlanController,
   StudentHealthCheckController,
+  RewardsController,
   HealthCheckController,
 ]);
 

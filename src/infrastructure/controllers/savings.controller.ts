@@ -11,7 +11,7 @@ import {
 } from "routing-controllers";
 import Container from "typedi";
 
-@JsonController('/savings')
+@JsonController("/savings")
 @UseBefore(CheckTokenExpiry)
 @Authorized()
 export class SavingsController {
@@ -19,7 +19,7 @@ export class SavingsController {
     GetSavingsByStudentIdUseCase,
   );
 
-  @Get('/student')
+  @Get("/student")
   @HttpCode(200)
   getSavingsByStudentId(@Req() req: RequestWithUser) {
     return this.getSavingsByStudentIdUseCase.call(req);

@@ -10,6 +10,9 @@ export class RoomCheckService {
       where: {
         student_id,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }
 }

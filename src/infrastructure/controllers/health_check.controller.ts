@@ -1,6 +1,6 @@
-import { HttpCode, Get, Controller } from "routing-controllers";
+import { HttpCode, Get, JsonController } from "routing-controllers";
 
-@Controller("/health-check")
+@JsonController("/health-check")
 export class HealthCheckController {
   @Get("/")
   @HttpCode(200)

@@ -17,8 +17,8 @@ import {
 import Container from "typedi";
 
 @JsonController("/user")
-@Authorized()
 @UseBefore(CheckTokenExpiry)
+@Authorized()
 export class UserController {
   private updateProfileUseCase = Container.get(UpdateProfileUseCase);
   private getProfileUseCase = Container.get(GetProfileUseCase);

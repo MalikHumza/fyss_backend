@@ -9,7 +9,6 @@ import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middl
 import { ValidationMiddleware } from "@infrastructure/middlewares/validation.middleware";
 import {
   HttpCode,
-  Controller,
   Post,
   Body,
   UseBefore,
@@ -17,12 +16,13 @@ import {
   Req,
   Authorized,
   Delete,
+  JsonController,
 } from "routing-controllers";
 import { ForgotPasswordUseCase } from "@domain/usecases/auth/forgot_password";
 import { ResetPasswordDTO } from "@data/dtos/auth/forgot_password.dto";
 import { SignOutUserUseCase } from "@domain/usecases/auth/signout_user";
 
-@Controller("/auth")
+@JsonController("/auth")
 export class AuthController {
   private signUpUseCase = Container.get(SignUpUseCase);
   private loginUseCase = Container.get(LoginUseCase);
@@ -45,8 +45,8 @@ export class AuthController {
   }
 
   @Patch("/reset-password")
-  @Authorized()
   @UseBefore(CheckTokenExpiry)
+  @Authorized()
   @UseBefore(ValidationMiddleware(ResetPasswordDTO))
   @HttpCode(200)
   resetPassword(@Req() req: RequestWithUser, @Body() data: ResetPasswordDTO) {
@@ -61,8 +61,8 @@ export class AuthController {
   }
 
   @Delete("/signout")
-  @Authorized()
   @UseBefore(CheckTokenExpiry)
+  @Authorized()
   @HttpCode(200)
   signOutUser(@Req() req: RequestWithUser) {
     return this.signOutUserUseCase.call(req);

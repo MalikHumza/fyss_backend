@@ -17,7 +17,7 @@ import Container from "typedi";
 export class RewardsController {
   private getStudentRewardsUseCase = Container.get(GetStudentRewardsUseCase);
 
-  @Get("/")
+  @Get("/student")
   @HttpCode(200)
   getStudentRewards(@Req() req: RequestWithUser) {
     return this.getStudentRewardsUseCase.call(req);

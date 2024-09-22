@@ -6,7 +6,7 @@ export class RewardsService {
   private rewards = database.instance.rewards;
 
   getStudentRewards(id: string, email: string) {
-    return this.rewards.findFirst({
+    return this.rewards.findMany({
       where: {
         student_id: id,
         student_email: email,

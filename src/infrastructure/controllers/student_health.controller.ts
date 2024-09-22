@@ -11,7 +11,7 @@ import {
 } from "routing-controllers";
 import Container from "typedi";
 
-@JsonController("/health/student")
+@JsonController("/health")
 @UseBefore(CheckTokenExpiry)
 @Authorized()
 export class StudentHealthCheckController {
@@ -19,7 +19,7 @@ export class StudentHealthCheckController {
     GetStudentHealthCheckUseCase,
   );
 
-  @Get("/")
+  @Get("/student")
   @HttpCode(200)
   getStudentHealthCheck(@Req() req: RequestWithUser) {
     return this.getStudentHealthCheckUseCase.call(req);

@@ -22,10 +22,7 @@ export class SupportPlanService {
     });
   }
 
-  getAllStudentSupportPlans(
-    student_id: string,
-    student_email: string,
-  ) {
+  getAllStudentSupportPlans(student_id: string, student_email: string) {
     return this.support.findMany({
       where: {
         student_id,

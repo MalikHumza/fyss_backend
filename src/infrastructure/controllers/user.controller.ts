@@ -23,7 +23,9 @@ import Container from "typedi";
 export class UserController {
   private updateProfileUseCase = Container.get(UpdateProfileUseCase);
   private getProfileUseCase = Container.get(GetProfileUseCase);
-  private getStudentDashboardUseCase = Container.get(GetStudentDashboardUseCase);
+  private getStudentDashboardUseCase = Container.get(
+    GetStudentDashboardUseCase,
+  );
 
   @Get("/")
   @HttpCode(200)
@@ -41,7 +43,7 @@ export class UserController {
     return this.updateProfileUseCase.call(req, data, file);
   }
 
-  @Get('/student/dashbaord')
+  @Get("/student/dashbaord")
   @HttpCode(200)
   getStudentDashboard(@Req() req: RequestWithUser) {
     return this.getStudentDashboardUseCase.call(req);

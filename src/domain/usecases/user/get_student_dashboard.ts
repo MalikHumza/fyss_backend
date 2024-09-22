@@ -9,50 +9,51 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class GetStudentDashboardUseCase {
-    @Inject()
-    private rewardsService: RewardsService;
-    @Inject()
-    private savingsService: SavingsService;
-    @Inject()
-    private healthService: StudentHealthService;
-    @Inject()
-    private roomCheckService: RoomCheckService;
-    @Inject()
-    private supportPlanService: SupportPlanService;
+  @Inject()
+  private rewardsService: RewardsService;
+  @Inject()
+  private savingsService: SavingsService;
+  @Inject()
+  private healthService: StudentHealthService;
+  @Inject()
+  private roomCheckService: RoomCheckService;
+  @Inject()
+  private supportPlanService: SupportPlanService;
 
-    public async call(req: RequestWithUser) {
-        const { id, email, name } = req.user;
-        const [rewards, mySavings, health, roomCheck, strengths] = await Promise.all([
-            this.rewardsService.getStudentRewards(id, email),
-            this.savingsService.getSavingsByStudentId(id, email),
-            this.healthService.getStudentHealth(id, email),
-            this.roomCheckService.getRoomCheckByStudentId(id),
-            this.supportPlanService.getAllStudentSupportPlans(id, email),
-        ]);
-        const totalSavings = mySavings.reduce((acc, i) => acc + i.balance, 0);
-        const totalPoints = rewards.reduce((acc, i) => acc + i.points, 0);
-        let response = {
-            id,
-            name,
-            hosue_points: {
-                total_points: totalPoints,
-                level: 6, // TODO: Need to get from response json 
-                level_points: 0
-            },
-            savings: {
-                total: totalSavings,
-            },
-            health: {
-                health_issue: health[0].health_issue || '',
-                consulted: health[0].appointment,
-            },
-            room_check: {
-                status: roomCheck[0].feedback || true
-            },
-            my_strengths: {
-                key_strength: strengths[0].strengths || ''
-            }
-        };
-        return new HttpResponse(response, false);
-    }
+  public async call(req: RequestWithUser) {
+    const { id, email, name } = req.user;
+    const [rewards, mySavings, health, roomCheck, strengths] =
+      await Promise.all([
+        this.rewardsService.getStudentRewards(id, email),
+        this.savingsService.getSavingsByStudentId(id, email),
+        this.healthService.getStudentHealth(id, email),
+        this.roomCheckService.getRoomCheckByStudentId(id),
+        this.supportPlanService.getAllStudentSupportPlans(id, email),
+      ]);
+    const totalSavings = mySavings.reduce((acc, i) => acc + i.balance, 0);
+    const totalPoints = rewards.reduce((acc, i) => acc + i.points, 0);
+    let response = {
+      id,
+      name,
+      hosue_points: {
+        total_points: totalPoints,
+        level: 6, // TODO: Need to get from response json
+        level_points: 0,
+      },
+      savings: {
+        total: totalSavings,
+      },
+      health: {
+        health_issue: health[0].health_issue || "",
+        consulted: health[0].appointment,
+      },
+      room_check: {
+        status: roomCheck[0].feedback || true,
+      },
+      my_strengths: {
+        key_strength: strengths[0].strengths || "",
+      },
+    };
+    return new HttpResponse(response, false);
+  }
 }

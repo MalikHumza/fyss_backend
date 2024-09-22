@@ -10,9 +10,7 @@ export const getAuthorization = (req: any) => {
   return null;
 };
 
-export const AuthMiddleware = async (
-  action: Action,
-): Promise<boolean> => {
+export const AuthMiddleware = async (action: Action): Promise<boolean> => {
   try {
     const req = action.request;
     const Authorization = getAuthorization(req);

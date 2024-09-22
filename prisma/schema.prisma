@@ -75,6 +75,7 @@ model RoomCheck {
   observation           String?
   thoughts_and_feelings String?
   maintenance_issues    String?
+  feedback              String?
   user                  User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
@@ -140,7 +141,7 @@ model Health {
   appointment        Boolean?
   feedback           String?
   medication         Boolean?
-  name_of_medication Boolean?
+  name_of_medication String?
   from_duration      Int?
   to_duration        Int?
   follow_up_date     Int?
@@ -161,8 +162,7 @@ model Rewards {
   points        Int?          @default(0)
   reflection    String?
   notes         String?
-  level         Int?          @default(0)
-  level_points  Int?          @default(0)
+  response      Json?
   user          User?         @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt

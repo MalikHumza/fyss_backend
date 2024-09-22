@@ -14,18 +14,18 @@ export class GetStudentRewardsUseCase {
     const { id, email } = req.user;
     const getrewards = await this.rewardsService.getStudentRewards(id, email);
     if (getrewards) {
-      const response = {
-        id: getrewards.id,
-        staff_name: getrewards.staff_name || "",
-        type: getrewards.type,
-        reason: getrewards.reason || "",
-        points_allocation: getrewards.points,
-        reflection: getrewards.reflection || "",
-        notes: getrewards.notes || "",
-        level: getrewards.level,
-        level_points: getrewards.level_points,
-        date: DateToMiliSeconds(getrewards.updatedAt),
-      };
+      const response = getrewards.map((i) => ({
+        id: i.id,
+        staff_name: i.staff_name || "",
+        type: i.type,
+        reason: i.reason || "",
+        points_allocation: i.points,
+        reflection: i.reflection || "",
+        notes: i.notes || "",
+        level: 6, // TODO: need to get from response json
+        level_points: 0,
+        date: DateToMiliSeconds(i.updatedAt),
+      }));
       return new HttpResponse(response, false);
     }
     throw new HttpError(400, "No Rewards found for student");

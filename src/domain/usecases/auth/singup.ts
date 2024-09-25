@@ -2,6 +2,7 @@ import { SignUpDTO } from "@data/dtos/auth/signup.dto";
 import { HttpResponse } from "@data/res/http_response";
 import { AuthService } from "@data/services/auth.service";
 import { UserService } from "@data/services/user.service";
+import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
 import { Inject, Service } from "typedi";
 
@@ -13,6 +14,10 @@ export class SignUpUseCase {
   private userService: UserService;
 
   public async call(data: SignUpDTO) {
+    const role = data.role;
+    if (role === Roles.ADMIN) {
+      throw new HttpError(400, "Invalid user role");
+    }
     const user = await this.userService.findUser(data.email);
     if (!user) {
       const result = await this.authService.createUser(data);

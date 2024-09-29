@@ -17,7 +17,9 @@ import Container from "typedi";
 @UseBefore(CheckTokenExpiry)
 @Authorized()
 export class ActionsPlanController {
-  private getActionPlanByStudentIdUseCase = Container.get(GetActionPlanByStudentIdUseCase);
+  private getActionPlanByStudentIdUseCase = Container.get(
+    GetActionPlanByStudentIdUseCase,
+  );
   private getPSPScheduleUseCase = Container.get(GetPSPScheduleUseCase);
 
   @Get("/student")
@@ -28,7 +30,11 @@ export class ActionsPlanController {
 
   @Get("/student/psp")
   @HttpCode(200)
-  getStudentPSPSchedule(@Req() req: RequestWithUser, @QueryParam('from_date', { required: true }) from_date: number, @QueryParam('to_date', { required: true }) to_date: number) {
+  getStudentPSPSchedule(
+    @Req() req: RequestWithUser,
+    @QueryParam("from_date", { required: true }) from_date: number,
+    @QueryParam("to_date", { required: true }) to_date: number,
+  ) {
     return this.getPSPScheduleUseCase.call(req, from_date, to_date);
   }
 }

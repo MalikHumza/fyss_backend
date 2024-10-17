@@ -1,4 +1,5 @@
 import database from "@config/database";
+import { CreateRoomCheckDTO } from "@data/dtos/roomChecks/create_room_check.dto";
 import { Service } from "typedi";
 
 @Service()
@@ -12,6 +13,20 @@ export class RoomCheckService {
       },
       orderBy: {
         createdAt: "desc",
+      },
+    });
+  }
+
+  createRoomCheckByStudentId(
+    student_id: string,
+    staff_id: string,
+    data: CreateRoomCheckDTO,
+  ) {
+    return this.roomcheck.create({
+      data: {
+        student_id,
+        staff_id,
+        ...data,
       },
     });
   }

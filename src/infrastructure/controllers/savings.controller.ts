@@ -36,7 +36,11 @@ export class SavingsController {
   @Post("/create/:student_id")
   @UseBefore(ValidationMiddleware(CreateSavingLogsDTO))
   @HttpCode(201)
-  createSavingsForStudents(@Req() req: RequestWithUser, @Param('student_id') id: string, @Body() data: CreateSavingLogsDTO) {
-    return this.createSavingForStudentsUseCase.call(req, id, data)
+  createSavingsForStudents(
+    @Req() req: RequestWithUser,
+    @Param("student_id") id: string,
+    @Body() data: CreateSavingLogsDTO,
+  ) {
+    return this.createSavingForStudentsUseCase.call(req, id, data);
   }
 }

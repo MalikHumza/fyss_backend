@@ -18,13 +18,17 @@ export class SavingsService {
     });
   }
 
-  createSavingsForStudent(student_id: string, staff_id: string, data: CreateSavingLogsDTO) {
+  createSavingsForStudent(
+    student_id: string,
+    staff_id: string,
+    data: CreateSavingLogsDTO,
+  ) {
     return this.savings.create({
       data: {
         student_id,
         staff_id,
-        ...data
-      }
-    })
+        ...data,
+      },
+    });
   }
 }

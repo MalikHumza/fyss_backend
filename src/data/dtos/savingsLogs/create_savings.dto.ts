@@ -1,12 +1,8 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { Service } from "typedi";
 
 @Service()
 export class CreateSavingLogsDTO {
-  @IsString()
-  @IsNotEmpty()
-  readonly staff_name: string;
-
   @IsString()
   @IsNotEmpty()
   readonly student_name: string;
@@ -16,8 +12,12 @@ export class CreateSavingLogsDTO {
   readonly student_email: string;
 
   @IsString()
-  @IsNotEmpty()
-  readonly deposited_by: string;
+  @IsOptional()
+  readonly depositer_name?: string;
+
+  @IsString()
+  @IsOptional()
+  readonly withdrawl_name?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -25,5 +25,5 @@ export class CreateSavingLogsDTO {
 
   @IsNumber()
   @IsNotEmpty()
-  readonly deposited_amount: number;
+  readonly amount: number;
 }

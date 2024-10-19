@@ -34,6 +34,11 @@ enum REWARD_TYPES {
   SANCTION
 }
 
+enum SAVINGS_TYPE {
+  DEPOSITOR
+  WITHDRAWL
+}
+
 enum ROOM_CHECK_FEEDBACK {
   CLEANLINESS
   BED_MADE
@@ -74,7 +79,7 @@ model Session {
 }
 
 model RoomCheck {
-  id                    String              @id @default(cuid())
+  id                    String                @id @default(cuid())
   staff_id              String?
   student_id            String?
   staff_name            String
@@ -83,9 +88,9 @@ model RoomCheck {
   thoughts_and_feelings String
   maintenance_issues    String
   feedback              ROOM_CHECK_FEEDBACK[]
-  user                  User?               @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt             DateTime            @default(now())
-  updatedAt             DateTime            @updatedAt
+  user                  User?                 @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
 }
 
 model Savings {
@@ -95,10 +100,11 @@ model Savings {
   student_id     String?
   student_name   String?
   student_email  String?
-  deposited_by   String? //Depositor name
-  recieved_by    String? //Staff name
-  deposit_amount Float?
-  balance        Float?
+  depositer_name String? //Depositor name
+  withdrawl_name String? //WithDrawl name
+  recieved_by    String? // reciever/staff name
+  amount         Float?
+  balance        Float?   @default(0)
   user           User?    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt

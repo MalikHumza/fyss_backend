@@ -1,4 +1,5 @@
 import database from "@config/database";
+import { CreateSavingLogsDTO } from "@data/dtos/savingsLogs/create_savings.dto";
 import { Service } from "typedi";
 
 @Service()
@@ -13,6 +14,20 @@ export class SavingsService {
       },
       orderBy: {
         createdAt: "desc",
+      },
+    });
+  }
+
+  createSavingsForStudent(
+    student_id: string,
+    staff_id: string,
+    data: CreateSavingLogsDTO,
+  ) {
+    return this.savings.create({
+      data: {
+        student_id,
+        staff_id,
+        ...data,
       },
     });
   }

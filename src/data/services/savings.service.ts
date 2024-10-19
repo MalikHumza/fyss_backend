@@ -25,9 +25,9 @@ export class SavingsService {
       },
       where: {
         id,
-        student_id
-      }
-    })
+        student_id,
+      },
+    });
   }
 
   createSavingsForStudent(

@@ -27,7 +27,9 @@ export class ActionsPlanController {
     GetActionPlanByStudentIdUseCase,
   );
   private getPSPScheduleUseCase = Container.get(GetPSPScheduleUseCase);
-  private createActionPlanForStudentUseCase = Container.get(CreateActionPlanForStudentUseCase);
+  private createActionPlanForStudentUseCase = Container.get(
+    CreateActionPlanForStudentUseCase,
+  );
 
   @Get("/student")
   @HttpCode(200)
@@ -48,7 +50,11 @@ export class ActionsPlanController {
   @Post("/:student_id")
   @UseBefore(ValidationMiddleware(CreateActionPlanForStudentDTO))
   @HttpCode(201)
-  createActionPlanForStudent(@Req() req: RequestWithUser, @Param('student_id') student_id: string, @Body() data: CreateActionPlanForStudentDTO) {
-    return this.createActionPlanForStudentUseCase.call(req, student_id, data)
+  createActionPlanForStudent(
+    @Req() req: RequestWithUser,
+    @Param("student_id") student_id: string,
+    @Body() data: CreateActionPlanForStudentDTO,
+  ) {
+    return this.createActionPlanForStudentUseCase.call(req, student_id, data);
   }
 }

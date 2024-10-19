@@ -41,7 +41,7 @@ export class SavingsController {
   createSavingsForStudents(
     @Req() req: RequestWithUser,
     @Param("student_id") id: string,
-    @QueryParam('type', { required: true }) type: string,
+    @QueryParam("type", { required: true }) type: string,
     @Body() data: CreateSavingLogsDTO,
   ) {
     const _type = SAVING_TYPES[type];

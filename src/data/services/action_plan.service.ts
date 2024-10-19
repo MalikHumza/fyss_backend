@@ -18,15 +18,21 @@ export class ActionPlanService {
     });
   }
 
-  createActionPlanForStudent(student_id: string, staff_name: string, staff_id: string, student_email: string, data: CreateActionPlanForStudentDTO) {
+  createActionPlanForStudent(
+    student_id: string,
+    staff_name: string,
+    staff_id: string,
+    student_email: string,
+    data: CreateActionPlanForStudentDTO,
+  ) {
     return this.action_plan.create({
       data: {
         staff_id,
         staff_name,
         student_id,
         student_email,
-        ...data
-      }
-    })
+        ...data,
+      },
+    });
   }
 }

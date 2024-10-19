@@ -25,7 +25,7 @@ export class UserService {
     return this.user.findUnique({
       where: {
         id: user_id,
-        role
+        role,
       },
     });
   }

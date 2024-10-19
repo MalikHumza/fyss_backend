@@ -16,15 +16,16 @@ export class GetSavingsByStudentIdUseCase {
       student_id,
       student_email,
     );
-    const totalBalance = savings.reduce((acc, i) => acc + i.balance, 0);
+
     const response = {
-      total: totalBalance ?? 0,
+      total: savings[0].balance ?? 0,
       savings: savings.map((i) => ({
         id: i.id,
         entry_by: i.staff_name || "",
-        deposited_by: i.deposited_by || "",
+        deposited_name: i.depositer_name || null,
+        withdrawl_name: i.withdrawl_name || null,
         recieved_by: i.recieved_by || "",
-        deposit_amount: i.deposit_amount ?? 0,
+        amount: i.amount ?? 0,
         balance: i.balance ?? 0,
         created_at: DateToMiliSeconds(i.createdAt),
       })),

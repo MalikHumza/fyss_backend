@@ -18,15 +18,29 @@ export class SavingsService {
     });
   }
 
+  updateStudentSavingsBalance(id: string, student_id: string, balance: number) {
+    return this.savings.update({
+      data: {
+        balance,
+      },
+      where: {
+        id,
+        student_id
+      }
+    })
+  }
+
   createSavingsForStudent(
     student_id: string,
     staff_id: string,
+    staff_name: string,
     data: CreateSavingLogsDTO,
   ) {
     return this.savings.create({
       data: {
         student_id,
         staff_id,
+        staff_name,
         ...data,
       },
     });

@@ -1,4 +1,5 @@
 import { CreateSavingLogsDTO } from "@data/dtos/savingsLogs/create_savings.dto";
+import { SAVING_TYPES } from "@data/enums/saving_types";
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { CreateSavingForStudentsUseCase } from "@domain/usecases/savings/create_savings_for_student";
 import { GetSavingsByStudentIdUseCase } from "@domain/usecases/savings/get_savings_by_student_id";
@@ -12,6 +13,7 @@ import {
   JsonController,
   Param,
   Post,
+  QueryParam,
   Req,
   UseBefore,
 } from "routing-controllers";
@@ -39,8 +41,10 @@ export class SavingsController {
   createSavingsForStudents(
     @Req() req: RequestWithUser,
     @Param("student_id") id: string,
+    @QueryParam('type', { required: true }) type: string,
     @Body() data: CreateSavingLogsDTO,
   ) {
-    return this.createSavingForStudentsUseCase.call(req, id, data);
+    const _type = SAVING_TYPES[type];
+    return this.createSavingForStudentsUseCase.call(req, id, _type, data);
   }
 }

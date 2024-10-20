@@ -66,6 +66,8 @@ model User {
   SupportPlan SupportPlan[]
   Health      Health[]
   Rewards     Rewards[]
+
+  @@unique([id])
 }
 
 model Session {

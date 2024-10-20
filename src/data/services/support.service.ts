@@ -1,4 +1,5 @@
 import database from "@config/database";
+import { CreateSupportPlanDTO } from "@data/dtos/supportPlan/create_support_plan.dto";
 import { QUARTER_MONTHS } from "@prisma/client";
 import { Service } from "typedi";
 
@@ -28,6 +29,16 @@ export class SupportPlanService {
         student_id,
         student_email,
       },
+    });
+  }
+
+  createSupportPlanForStudent(staff_id: string, student_id: string, data: CreateSupportPlanDTO) {
+    return this.support.create({
+      data: {
+        student_id,
+        staff_id,
+        ...data
+      }
     });
   }
 }

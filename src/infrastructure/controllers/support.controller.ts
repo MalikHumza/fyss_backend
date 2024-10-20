@@ -44,7 +44,11 @@ export class SupportPlanController {
   @Post("/create/:student_id")
   @UseBefore(ValidationMiddleware(CreateSupportPlanDTO))
   @HttpCode(201)
-  createSupportPlanForStudent(@Req() req: RequestWithUser, @Param('student_id') student_id: string, @Body() data: CreateSupportPlanDTO) {
+  createSupportPlanForStudent(
+    @Req() req: RequestWithUser,
+    @Param("student_id") student_id: string,
+    @Body() data: CreateSupportPlanDTO,
+  ) {
     return this.createSupportPlanForStudentUseCase.call(req, student_id, data);
   }
 }

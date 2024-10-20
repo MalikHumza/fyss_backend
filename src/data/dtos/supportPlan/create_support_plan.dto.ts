@@ -4,27 +4,27 @@ import { Service } from "typedi";
 
 @Service()
 export class CreateSupportPlanDTO {
-    @IsString()
-    @IsNotEmpty()
-    readonly student_email: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly student_email: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly strengths: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly strengths: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly area_of_development: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly area_of_development: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly current_strategy_and_support: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly current_strategy_and_support: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly month: QUARTER_MONTHS;
+  @IsString()
+  @IsNotEmpty()
+  readonly month: QUARTER_MONTHS;
 
-    @IsNumber()
-    @IsNotEmpty()
-    readonly year: number;
+  @IsNumber()
+  @IsNotEmpty()
+  readonly year: number;
 }

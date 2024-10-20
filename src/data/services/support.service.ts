@@ -32,13 +32,17 @@ export class SupportPlanService {
     });
   }
 
-  createSupportPlanForStudent(staff_id: string, student_id: string, data: CreateSupportPlanDTO) {
+  createSupportPlanForStudent(
+    staff_id: string,
+    student_id: string,
+    data: CreateSupportPlanDTO,
+  ) {
     return this.support.create({
       data: {
         student_id,
         staff_id,
-        ...data
-      }
+        ...data,
+      },
     });
   }
 }

@@ -53,6 +53,12 @@ enum ROOM_CHECK_FEEDBACK {
   GARBAGE_DISPOSED
 }
 
+enum REWARD_TIERS {
+  BRONZE
+  SILVER
+  GOLD
+}
+
 model User {
   id             String   @id @default(cuid())
   name           String?
@@ -66,13 +72,14 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  sessions    Session[]
-  RoomCheck   RoomCheck[]
-  Savings     Savings[]
-  ActionPlan  ActionPlan[]
-  SupportPlan SupportPlan[]
-  Health      Health[]
-  Rewards     Rewards[]
+  sessions               Session[]
+  RoomCheck              RoomCheck[]
+  Savings                Savings[]
+  ActionPlan             ActionPlan[]
+  SupportPlan            SupportPlan[]
+  Health                 Health[]
+  Rewards                Rewards[]
+  StudentRewardsProgress StudentRewardsProgress?
 
   @@unique([id])
 }
@@ -196,4 +203,17 @@ model RewardScoring {
   value     Int
   createdAt DateTime    @default(now())
   updatedAT DateTime    @updatedAt
+}
+
+model StudentRewardsProgress {
+  id             String   @id @default(cuid())
+  student_id     String   @unique
+  current_points Int      @default(0)
+  total_points   Int?     @default(0)
+  current_level  Int      @default(0)
+  points_to_next Int      @default(500)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  student User? @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

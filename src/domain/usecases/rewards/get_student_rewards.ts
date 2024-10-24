@@ -20,7 +20,10 @@ export class GetStudentRewardsUseCase {
     if (getrewards && getrewards.length > 0) {
       const response = await Promise.all(
         getrewards.map(async (i) => {
-          const progress = await this.rewardProgress.getRewardsProgressByStudentId(i.student_id);
+          const progress =
+            await this.rewardProgress.getRewardsProgressByStudentId(
+              i.student_id,
+            );
           return {
             id: i.id,
             student_id: i.student_id,
@@ -32,10 +35,12 @@ export class GetStudentRewardsUseCase {
             notes: i.notes || "",
             level: progress ? progress.current_level : 0, // Use progress to get current level
             current_points: progress ? progress.current_points : 0, // Use progress to get current points
-            points_to_next: progress ? `${progress.points_to_next} + ${progress.current_level + 1}` : 0, // Use progress to get points to next level
+            points_to_next: progress
+              ? `${progress.points_to_next} + ${progress.current_level + 1}`
+              : 0, // Use progress to get points to next level
             created_at: DateToMiliSeconds(i.createdAt),
           };
-        })
+        }),
       );
 
       return new HttpResponse(response, false);

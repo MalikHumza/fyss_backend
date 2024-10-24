@@ -11,4 +11,5 @@ export const {
   LOG_FORMAT,
   FRONTEND_APPLICATION_URL,
   JWT_KEY,
+  MAX_CURRENT_POINTS,
 } = process.env;

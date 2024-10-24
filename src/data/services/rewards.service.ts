@@ -15,15 +15,21 @@ export class RewardsService {
     });
   }
 
-  createRewardsForStudent(staff_id: string, staff_name: string, student_id: string, points: number, data: CreateStudentRewardsDTO) {
+  createRewardsForStudent(
+    staff_id: string,
+    staff_name: string,
+    student_id: string,
+    points: number,
+    data: CreateStudentRewardsDTO,
+  ) {
     return this.rewards.create({
       data: {
         staff_id,
         staff_name,
         student_id,
         points,
-        ...data
-      }
-    })
+        ...data,
+      },
+    });
   }
 }

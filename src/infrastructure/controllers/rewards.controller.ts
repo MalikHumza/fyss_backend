@@ -22,7 +22,9 @@ import Container from "typedi";
 @Authorized()
 export class RewardsController {
   private getStudentRewardsUseCase = Container.get(GetStudentRewardsUseCase);
-  private createRewardsForStudentUseCase = Container.get(CreateRewardsForStudentUseCase);
+  private createRewardsForStudentUseCase = Container.get(
+    CreateRewardsForStudentUseCase,
+  );
 
   @Get("/student")
   @HttpCode(200)
@@ -30,10 +32,14 @@ export class RewardsController {
     return this.getStudentRewardsUseCase.call(req);
   }
 
-  @Post('/create/:student_id')
+  @Post("/create/:student_id")
   @UseBefore(ValidationMiddleware(CreateStudentRewardsDTO))
   @HttpCode(201)
-  createRewardsForStudent(@Req() req: RequestWithUser, @Param('student_id') student_id: string, @Body() data: CreateStudentRewardsDTO) {
+  createRewardsForStudent(
+    @Req() req: RequestWithUser,
+    @Param("student_id") student_id: string,
+    @Body() data: CreateStudentRewardsDTO,
+  ) {
     return this.createRewardsForStudentUseCase.call(req, student_id, data);
   }
 }

@@ -20,8 +20,8 @@ import {
 import Container from "typedi";
 
 @JsonController("/support-plan")
-// @UseBefore(CheckTokenExpiry)
-// @Authorized()
+@UseBefore(CheckTokenExpiry)
+@Authorized()
 export class SupportPlanController {
   private getStudentSupportPlanUseCase = Container.get(
     GetStudentSupportPlanUseCase,

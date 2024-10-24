@@ -7,30 +7,40 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class CreateStudentHealthCheckUseCase {
-    @Inject()
-    private student_health_service: StudentHealthService;
+  @Inject()
+  private student_health_service: StudentHealthService;
 
-    public async call(req: RequestWithUser, student_id: string, data: CreateStudentHealthCheckDTO) {
-        const staff_id = req.user.id;
-        const staff_name = req.user.name;
-        const health = await this.student_health_service.createHealthMeasureForStudent(student_id, staff_id, staff_name, data);
-        const response = {
-            id: health.id,
-            staff_name,
-            staff_id,
-            student_id,
-            student_email: health.student_email,
-            health_issue: health.health_issue,
-            appointment: health.appointment,
-            feedback: health.feedback,
-            medication: health.medication,
-            name_of_medication: health.name_of_medication,
-            course_duaration: `${health.from_duration} - ${health.to_duration}`,
-            follow_up_date: health.follow_up_date,
-            evidence: health.evidence,
-            created_at: DateToMiliSeconds(health.createdAt)
-        }
+  public async call(
+    req: RequestWithUser,
+    student_id: string,
+    data: CreateStudentHealthCheckDTO,
+  ) {
+    const staff_id = req.user.id;
+    const staff_name = req.user.name;
+    const health =
+      await this.student_health_service.createHealthMeasureForStudent(
+        student_id,
+        staff_id,
+        staff_name,
+        data,
+      );
+    const response = {
+      id: health.id,
+      staff_name,
+      staff_id,
+      student_id,
+      student_email: health.student_email,
+      health_issue: health.health_issue,
+      appointment: health.appointment,
+      feedback: health.feedback,
+      medication: health.medication,
+      name_of_medication: health.name_of_medication,
+      course_duaration: `${health.from_duration} - ${health.to_duration}`,
+      follow_up_date: health.follow_up_date,
+      evidence: health.evidence,
+      created_at: DateToMiliSeconds(health.createdAt),
+    };
 
-        return new HttpResponse(response, false);
-    }
+    return new HttpResponse(response, false);
+  }
 }

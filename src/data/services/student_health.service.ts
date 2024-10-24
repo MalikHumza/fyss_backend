@@ -18,14 +18,19 @@ export class StudentHealthService {
     });
   }
 
-  createHealthMeasureForStudent(student_id: string, staff_id: string, staff_name: string, data: CreateStudentHealthCheckDTO) {
+  createHealthMeasureForStudent(
+    student_id: string,
+    staff_id: string,
+    staff_name: string,
+    data: CreateStudentHealthCheckDTO,
+  ) {
     return this.health.create({
       data: {
         staff_id,
         student_id,
         staff_name,
-        ...data
-      }
-    })
+        ...data,
+      },
+    });
   }
 }

@@ -13,6 +13,7 @@ export class AuthService {
       data: {
         email: data.email,
         name: data.name,
+        title: data.title,
         hashedPassword: hashedPassword,
         role: data.role,
       },

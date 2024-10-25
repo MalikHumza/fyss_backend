@@ -13,6 +13,10 @@ export class SignUpDTO {
   readonly name?: string;
 
   @IsString()
+  @IsOptional()
+  readonly title?: string;
+
+  @IsString()
   @IsNotEmpty()
   readonly password: string;
 

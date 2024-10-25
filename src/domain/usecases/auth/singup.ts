@@ -24,6 +24,7 @@ export class SignUpUseCase {
       const response = {
         id: result.id,
         name: result.name,
+        title: result.title || "",
         email: result.email,
         dob: result.dob,
         phone_number: result.phone_number,

@@ -17,7 +17,8 @@ export class GetStudentRewardsUseCase {
     const { id, email } = req.user;
     const getrewards = await this.rewardsService.getStudentRewards(id, email);
 
-    const progress = await this.rewardProgress.getRewardsProgressByStudentId(id);
+    const progress =
+      await this.rewardProgress.getRewardsProgressByStudentId(id);
     if (getrewards && getrewards.length > 0) {
       const response = {
         top_level: {
@@ -27,7 +28,7 @@ export class GetStudentRewardsUseCase {
             ? `${progress.points_to_next} + ${progress.current_level + 1}`
             : 0, // Use progress to get points to next level
         },
-        rewards: getrewards.map(i => ({
+        rewards: getrewards.map((i) => ({
           id: i.id,
           student_id: i.student_id,
           staff_name: i.staff_name || "",
@@ -38,7 +39,7 @@ export class GetStudentRewardsUseCase {
           notes: i.notes || "",
           created_at: DateToMiliSeconds(i.createdAt),
         })),
-      }
+      };
       return new HttpResponse(response, false);
     }
 

@@ -17,32 +17,28 @@ export class GetStudentRewardsUseCase {
     const { id, email } = req.user;
     const getrewards = await this.rewardsService.getStudentRewards(id, email);
 
+    const progress = await this.rewardProgress.getRewardsProgressByStudentId(id);
     if (getrewards && getrewards.length > 0) {
-      const response = await Promise.all(
-        getrewards.map(async (i) => {
-          const progress =
-            await this.rewardProgress.getRewardsProgressByStudentId(
-              i.student_id,
-            );
-          return {
-            id: i.id,
-            student_id: i.student_id,
-            staff_name: i.staff_name || "",
-            type: i.type,
-            reason: i.reason || "",
-            points_allocation: `${i.points} + ${i.reward_key}`,
-            reflection: i.reflection || "",
-            notes: i.notes || "",
-            level: progress ? progress.current_level : 0, // Use progress to get current level
-            current_points: progress ? progress.current_points : 0, // Use progress to get current points
-            points_to_next: progress
-              ? `${progress.points_to_next} + ${progress.current_level + 1}`
-              : 0, // Use progress to get points to next level
-            created_at: DateToMiliSeconds(i.createdAt),
-          };
-        }),
-      );
-
+      const response = {
+        top_level: {
+          current_points: progress ? progress.current_points : 0, // Use progress to get current points
+          level: progress ? progress.current_level : 0, // Use progress to get current level
+          points_to_next: progress
+            ? `${progress.points_to_next} + ${progress.current_level + 1}`
+            : 0, // Use progress to get points to next level
+        },
+        rewards: getrewards.map(i => ({
+          id: i.id,
+          student_id: i.student_id,
+          staff_name: i.staff_name || "",
+          type: i.type,
+          reason: i.reason || "",
+          points_allocation: `${i.points} + ${i.reward_key}`,
+          reflection: i.reflection || "",
+          notes: i.notes || "",
+          created_at: DateToMiliSeconds(i.createdAt),
+        })),
+      }
       return new HttpResponse(response, false);
     }
 

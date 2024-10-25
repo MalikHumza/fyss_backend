@@ -18,13 +18,6 @@ export const AuthMiddleware = async (action: Action): Promise<boolean> => {
     if (Authorization) {
       const { id, name, email, role } = parseJwt(Authorization);
 
-      // const session = await sessionModel.findUnique({
-      //   where: { sessionToken: Authorization },
-      // });
-
-      // if (!session || new Date(session.expires).getTime() < Date.now()) {
-      //   return false;
-      // }
       action.request.user = {
         id,
         name,

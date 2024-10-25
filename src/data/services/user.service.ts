@@ -38,6 +38,7 @@ export class UserService {
       },
       data: {
         name: data.name ?? null,
+        title: data.title ?? null,
         dob: data.dob ?? null,
         phone_number: data.phone_number ?? null,
         gender: data.gender ?? null,

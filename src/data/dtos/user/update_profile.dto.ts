@@ -8,6 +8,10 @@ export class UpdateProfileDTO {
   @IsOptional()
   readonly name?: string;
 
+  @IsString()
+  @IsOptional()
+  readonly title?: string;
+
   @IsInt()
   @Type(() => Number)
   @IsOptional()

@@ -14,6 +14,7 @@ export class GetProfileUseCase {
     const response = {
       id: user.id,
       name: user.name,
+      title: user.title || null,
       email: user.email,
       dob: user.dob,
       phone_number: user.phone_number,

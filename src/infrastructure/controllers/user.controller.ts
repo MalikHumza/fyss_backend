@@ -1,6 +1,7 @@
 import { UpdateProfileDTO } from "@data/dtos/user/update_profile.dto";
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { GetProfileUseCase } from "@domain/usecases/user/get_profile";
+import { GetStaffDashboardUseCase } from "@domain/usecases/user/get_staff_dashboard";
 import { GetStudentDashboardUseCase } from "@domain/usecases/user/get_student_dashboard";
 import { UpdateProfileUseCase } from "@domain/usecases/user/update_profile";
 import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middleware";
@@ -26,6 +27,7 @@ export class UserController {
   private getStudentDashboardUseCase = Container.get(
     GetStudentDashboardUseCase,
   );
+  private getStaffDashboardUseCase = Container.get(GetStaffDashboardUseCase);
 
   @Get("/")
   @HttpCode(200)
@@ -47,5 +49,11 @@ export class UserController {
   @HttpCode(200)
   getStudentDashboard(@Req() req: RequestWithUser) {
     return this.getStudentDashboardUseCase.call(req);
+  }
+
+  @Get("/staff/dashboard")
+  @HttpCode(200)
+  getStaffDashboard(@Req() req: RequestWithUser) {
+    return this.getStaffDashboardUseCase.call(req);
   }
 }

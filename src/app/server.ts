@@ -17,7 +17,7 @@ ValidateEnv();
 
 const app = new App([
   AuthController,
-  UserController, 
+  UserController,
   RoomCheckController,
   SavingsController,
   ActionsPlanController,

@@ -6,24 +6,26 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class GetShiftTrackerByPropertyIdUseCase {
-    @Inject()
-    private shiftTracker: ShiftTrackerService;
+  @Inject()
+  private shiftTracker: ShiftTrackerService;
 
-    public async call(req: RequestWithUser, property_id: string) {
-        const staff_id = req.user.id;
-        const staff_name = req.user.name;
-        const result =
-            await this.shiftTracker.getShiftsRecordByPropertyId(property_id, staff_id);
-        const response = result.map((i) => ({
-            id: i.id,
-            staff_id,
-            handover_from: i.from,
-            handover_to: i.to,
-            shift: i.shift,
-            verbal_handover: i.verbal_handover,
-            recieved_by: staff_name,
-            created_at: DateToMiliSeconds(i.createdAt)
-        }));
-        return new HttpResponse(response, false);
-    }
+  public async call(req: RequestWithUser, property_id: string) {
+    const staff_id = req.user.id;
+    const staff_name = req.user.name;
+    const result = await this.shiftTracker.getShiftsRecordByPropertyId(
+      property_id,
+      staff_id,
+    );
+    const response = result.map((i) => ({
+      id: i.id,
+      staff_id,
+      handover_from: i.from,
+      handover_to: i.to,
+      shift: i.shift,
+      verbal_handover: i.verbal_handover,
+      recieved_by: staff_name,
+      created_at: DateToMiliSeconds(i.createdAt),
+    }));
+    return new HttpResponse(response, false);
+  }
 }

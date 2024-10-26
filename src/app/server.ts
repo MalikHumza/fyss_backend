@@ -29,7 +29,7 @@ const app = new App([
   AdminController,
   PropertiesController,
   ShiftTrackerController,
-  TrainingDatesController
+  TrainingDatesController,
 ]);
 
 app.listen();

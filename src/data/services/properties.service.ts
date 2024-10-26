@@ -18,6 +18,6 @@ export class PropertiesService {
   }
 
   getPropertyById(id: string, staff_id: string) {
-    return this.properties.findUnique({ where: { id, staff_id } })
+    return this.properties.findUnique({ where: { id, staff_id } });
   }
 }

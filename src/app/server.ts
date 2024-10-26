@@ -10,12 +10,14 @@ import { SupportPlanController } from "@infrastructure/controllers/support.contr
 import { StudentHealthCheckController } from "@infrastructure/controllers/student_health.controller";
 import { RewardsController } from "@infrastructure/controllers/rewards.controller";
 import { AdminController } from "@infrastructure/controllers/admin.controller";
+import { PropertiesController } from "@infrastructure/controllers/properties.controller";
+import { ShiftTrackerController } from "@infrastructure/controllers/shift_tracker.controller";
 
 ValidateEnv();
 
 const app = new App([
   AuthController,
-  UserController,
+  UserController, 
   RoomCheckController,
   SavingsController,
   ActionsPlanController,
@@ -24,6 +26,8 @@ const app = new App([
   RewardsController,
   HealthCheckController,
   AdminController,
+  PropertiesController,
+  ShiftTrackerController,
 ]);
 
 app.listen();

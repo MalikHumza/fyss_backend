@@ -227,27 +227,41 @@ model StudentRewardsProgress {
 }
 
 model Properties {
-  id           String         @id @default(cuid())
-  name         String
-  location     String
-  occupancy    Int
-  image        String?
-  description  String?
-  staff_id     String
-  staff        User?          @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  ShiftTracker ShiftTracker[]
+  id            String          @id @default(cuid())
+  name          String
+  location      String
+  occupancy     Int
+  image         String?
+  description   String?
+  staff_id      String
+  staff         User?           @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  ShiftTracker  ShiftTracker[]
+  TrainingDates TrainingDates[]
 }
 
 model ShiftTracker {
-  id              String     @id @default(cuid())
+  id              String      @id @default(cuid())
   from            String
   to              String
   shift           SHIFT
   verbal_handover Boolean
-  property_id     String
-  property        Properties @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  property_id     String?
+  property        Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model TrainingDates {
+  id          String      @id @default(cuid())
+  topic       String
+  summary     String
+  notes       String?
+  from        String
+  to          String
+  property_id String?
+  property    Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }

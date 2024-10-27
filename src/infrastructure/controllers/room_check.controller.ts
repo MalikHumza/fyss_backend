@@ -18,8 +18,8 @@ import {
 import Container from "typedi";
 
 @JsonController("/room-check")
-@UseBefore(CheckTokenExpiry)
-@Authorized()
+// @UseBefore(CheckTokenExpiry)
+// @Authorized()
 export class RoomCheckController {
   private getRoomCheckByStudentIdUseCase = Container.get(
     GetRoomCheckByStudentIdUseCase,

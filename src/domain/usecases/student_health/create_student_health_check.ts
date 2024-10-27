@@ -3,6 +3,8 @@ import { RequestWithUser } from "@data/interfaces/request.interface";
 import { HttpResponse } from "@data/res/http_response";
 import { StudentHealthService } from "@data/services/student_health.service";
 import { DateToMiliSeconds } from "@infrastructure/common/epoch-converter";
+import { Roles } from "@prisma/client";
+import { HttpError } from "routing-controllers";
 import { Inject, Service } from "typedi";
 
 @Service()
@@ -17,6 +19,15 @@ export class CreateStudentHealthCheckUseCase {
   ) {
     const staff_id = req.user.id;
     const staff_name = req.user.name;
+    const role = req.user.role;
+
+    if (role === Roles.STUDENT) {
+      throw new HttpError(400, "Not Authorized");
+    }
+
+    if (!student_id) {
+      throw new HttpError(400, "Student Id cannot be empty");
+    }
     const health =
       await this.student_health_service.createHealthMeasureForStudent(
         student_id,

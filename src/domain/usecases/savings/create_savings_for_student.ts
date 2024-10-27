@@ -3,6 +3,7 @@ import { SAVING_TYPES } from "@data/enums/saving_types";
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { HttpResponse } from "@data/res/http_response";
 import { SavingsService } from "@data/services/savings.service";
+import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
 import { Inject, Service } from "typedi";
 @Service()
@@ -16,9 +17,17 @@ export class CreateSavingForStudentsUseCase {
     type: SAVING_TYPES,
     data: CreateSavingLogsDTO,
   ) {
-    const staff_id = "req.user.id";
-    const staff_name = "req.user.name";
+    const staff_id = req.user.id;
+    const staff_name = req.user.name;
 
+    const role = req.user.role;
+
+    if (role === Roles.STUDENT) {
+      throw new HttpError(400, "Not Authorized");
+    }
+    if (!student_id) {
+      throw new HttpError(400, "Student Id cannot be empty");
+    }
     switch (type) {
       case SAVING_TYPES.DEPOSITOR:
         const savings = await this.savingService.createSavingsForStudent(

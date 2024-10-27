@@ -7,6 +7,7 @@ import { StudentRewardsProgressService } from "@data/services/student_rewards_pr
 import { DateToMiliSeconds } from "@infrastructure/common/epoch-converter";
 import { logger } from "@infrastructure/common/logger";
 import { getSum } from "@infrastructure/common/math";
+import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
 import { Inject, Service } from "typedi";
 
@@ -27,7 +28,15 @@ export class CreateRewardsForStudentUseCase {
     try {
       const staff_id = req.user.id;
       const staff_name = req.user.name;
+      const role = req.user.role;
 
+      if (role === Roles.STUDENT) {
+        throw new HttpError(400, "Not Authorized");
+      }
+
+      if (!student_id) {
+        throw new HttpError(400, "Student Id cannot be empty");
+      }
       const MAX_CURRENT_POINTS = parseInt(
         process.env.MAX_CURRENT_POINTS || "500",
         10,

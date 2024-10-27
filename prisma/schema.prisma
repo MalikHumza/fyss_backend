@@ -227,18 +227,20 @@ model StudentRewardsProgress {
 }
 
 model Properties {
-  id            String          @id @default(cuid())
-  name          String
-  location      String
-  occupancy     Int
-  image         String?
-  description   String?
-  staff_id      String
-  staff         User?           @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  ShiftTracker  ShiftTracker[]
-  TrainingDates TrainingDates[]
+  id                     String                   @id @default(cuid())
+  name                   String
+  location               String
+  occupancy              Int
+  image                  String?
+  description            String?
+  staff_id               String
+  staff                  User?                    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  ShiftTracker           ShiftTracker[]
+  TrainingDates          TrainingDates[]
+  ShoppingStockInventory ShoppingStockInventory[]
+  KnifeInventory         KnifeInventory[]
 }
 
 model ShiftTracker {
@@ -264,4 +266,33 @@ model TrainingDates {
   property    Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+}
+
+model ShoppingStockInventory {
+  id            String      @id @default(cuid())
+  name          String
+  location      String
+  quantity      Int
+  allocated_to  String
+  date_ordered  Int
+  date_recieved Int
+  property_id   String
+  property      Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model KnifeInventory {
+  id            String      @id @default(cuid())
+  name          String
+  type          String
+  purpose       String
+  supervised    Boolean
+  time_out      Int
+  time_returned Int
+  notes         String
+  property_id   String
+  properties    Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }

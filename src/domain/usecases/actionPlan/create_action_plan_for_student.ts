@@ -22,6 +22,12 @@ export class CreateActionPlanForStudentUseCase {
   ) {
     const staff_id = req.user.id;
     const staff_name = req.user.name;
+    const role = req.user.role;
+
+    if (role === Roles.STUDENT) {
+      throw new HttpError(400, "Not Authorized");
+    }
+
     const student = await this.userService.findUserWithIdAndRole(
       student_id,
       Roles.STUDENT,

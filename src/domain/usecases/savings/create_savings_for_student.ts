@@ -3,6 +3,7 @@ import { SAVING_TYPES } from "@data/enums/saving_types";
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { HttpResponse } from "@data/res/http_response";
 import { SavingsService } from "@data/services/savings.service";
+import { UserService } from "@data/services/user.service";
 import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
 import { Inject, Service } from "typedi";
@@ -10,6 +11,8 @@ import { Inject, Service } from "typedi";
 export class CreateSavingForStudentsUseCase {
   @Inject()
   private savingService: SavingsService;
+  @Inject()
+  private userService: UserService;
 
   public async call(
     req: RequestWithUser,
@@ -25,9 +28,16 @@ export class CreateSavingForStudentsUseCase {
     if (role === Roles.STUDENT) {
       throw new HttpError(400, "Not Authorized");
     }
+
     if (!student_id) {
       throw new HttpError(400, "Student Id cannot be empty");
     }
+
+    const student = await this.userService.findUserWithId(student_id);
+    if (!student) {
+      throw new HttpError(400, "Student does not exist");
+    }
+
     switch (type) {
       case SAVING_TYPES.DEPOSITOR:
         const savings = await this.savingService.createSavingsForStudent(

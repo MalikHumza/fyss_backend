@@ -4,6 +4,7 @@ import { HttpResponse } from "@data/res/http_response";
 import { RewardsService } from "@data/services/rewards.service";
 import { RewardScoringService } from "@data/services/rewards_scoring.service";
 import { StudentRewardsProgressService } from "@data/services/student_rewards_progress.service";
+import { UserService } from "@data/services/user.service";
 import { DateToMiliSeconds } from "@infrastructure/common/epoch-converter";
 import { logger } from "@infrastructure/common/logger";
 import { getSum } from "@infrastructure/common/math";
@@ -19,6 +20,8 @@ export class CreateRewardsForStudentUseCase {
   private rewardsScoring: RewardScoringService;
   @Inject()
   private rewardsProgress: StudentRewardsProgressService;
+  @Inject()
+  private userService: UserService;
 
   public async call(
     req: RequestWithUser,
@@ -37,6 +40,12 @@ export class CreateRewardsForStudentUseCase {
       if (!student_id) {
         throw new HttpError(400, "Student Id cannot be empty");
       }
+
+      const student = await this.userService.findUserWithId(student_id);
+      if (!student) {
+        throw new HttpError(400, "Student does not exist");
+      }
+
       const MAX_CURRENT_POINTS = parseInt(
         process.env.MAX_CURRENT_POINTS || "500",
         10,

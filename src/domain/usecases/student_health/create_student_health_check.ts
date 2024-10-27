@@ -2,6 +2,7 @@ import { CreateStudentHealthCheckDTO } from "@data/dtos/student_health/student_h
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { HttpResponse } from "@data/res/http_response";
 import { StudentHealthService } from "@data/services/student_health.service";
+import { UserService } from "@data/services/user.service";
 import { DateToMiliSeconds } from "@infrastructure/common/epoch-converter";
 import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
@@ -11,6 +12,8 @@ import { Inject, Service } from "typedi";
 export class CreateStudentHealthCheckUseCase {
   @Inject()
   private student_health_service: StudentHealthService;
+  @Inject()
+  private userService: UserService;
 
   public async call(
     req: RequestWithUser,
@@ -28,6 +31,12 @@ export class CreateStudentHealthCheckUseCase {
     if (!student_id) {
       throw new HttpError(400, "Student Id cannot be empty");
     }
+
+    const student = await this.userService.findUserWithId(student_id);
+    if (!student) {
+      throw new HttpError(400, "Student does not exist");
+    }
+
     const health =
       await this.student_health_service.createHealthMeasureForStudent(
         student_id,

@@ -2,6 +2,7 @@ import { CreateSupportPlanDTO } from "@data/dtos/supportPlan/create_support_plan
 import { RequestWithUser } from "@data/interfaces/request.interface";
 import { HttpResponse } from "@data/res/http_response";
 import { SupportPlanService } from "@data/services/support.service";
+import { UserService } from "@data/services/user.service";
 import { DateToMiliSeconds } from "@infrastructure/common/epoch-converter";
 import { Roles } from "@prisma/client";
 import { HttpError } from "routing-controllers";
@@ -11,6 +12,8 @@ import { Inject, Service } from "typedi";
 export class CreateSupportPlanForStudentUseCase {
   @Inject()
   private supportPlanService: SupportPlanService;
+  @Inject()
+  private userService: UserService;
 
   public async call(
     req: RequestWithUser,
@@ -19,11 +22,17 @@ export class CreateSupportPlanForStudentUseCase {
   ) {
     const staff_id = req.user.id;
     const role = req.user.role;
+
     if (role === Roles.STUDENT) {
       throw new HttpError(400, "Not Authorized");
     }
     if (!student_id) {
       throw new HttpError(400, "Student Id cannot be empty");
+    }
+
+    const student = await this.userService.findUserWithId(student_id);
+    if (!student) {
+      throw new HttpError(400, "Student does not exist");
     }
 
     const result = await this.supportPlanService.createSupportPlanForStudent(

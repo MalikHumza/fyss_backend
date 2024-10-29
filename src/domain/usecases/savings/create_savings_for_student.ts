@@ -44,12 +44,13 @@ export class CreateSavingForStudentsUseCase {
           student_id,
           staff_id,
           staff_name,
+          student.name,
           data,
         );
 
         const saving_data = await this.savingService.getSavingsByStudentId(
           student_id,
-          data.student_email,
+          student.email,
         );
         if (saving_data.length > 0) {
           const saving_balance = saving_data[0].balance;
@@ -68,7 +69,7 @@ export class CreateSavingForStudentsUseCase {
       case SAVING_TYPES.WITHDRAWL:
         const check_savings = await this.savingService.getSavingsByStudentId(
           student_id,
-          data.student_email,
+          student.email,
         );
         if (check_savings.length > 0) {
           const saving_amount = check_savings[0].balance;
@@ -82,6 +83,7 @@ export class CreateSavingForStudentsUseCase {
             student_id,
             staff_id,
             staff_name,
+            student.name,
             data,
           );
           const available_balance = saving_amount - data.amount;

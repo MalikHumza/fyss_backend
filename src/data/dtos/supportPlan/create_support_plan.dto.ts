@@ -6,10 +6,6 @@ import { Service } from "typedi";
 export class CreateSupportPlanDTO {
   @IsString()
   @IsNotEmpty()
-  readonly student_email: string;
-
-  @IsString()
-  @IsNotEmpty()
   readonly strengths: string;
 
   @IsString()

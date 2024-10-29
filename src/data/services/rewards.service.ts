@@ -19,6 +19,7 @@ export class RewardsService {
     staff_id: string,
     staff_name: string,
     student_id: string,
+    student_email: string,
     points: number,
     data: CreateStudentRewardsDTO,
   ) {
@@ -27,6 +28,7 @@ export class RewardsService {
         staff_id,
         staff_name,
         student_id,
+        student_email,
         points,
         ...data,
       },

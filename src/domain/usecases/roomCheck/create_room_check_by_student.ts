@@ -20,6 +20,7 @@ export class CreateRoomCheckByStudentUseCase {
     data: CreateRoomCheckDTO,
   ) {
     const staff_id = req.user.id;
+    const staff_name = req.user.name;
     const role = req.user.role;
 
     if (role === Roles.STUDENT) {
@@ -38,6 +39,7 @@ export class CreateRoomCheckByStudentUseCase {
     const result = await this.roomCheckService.createRoomCheckByStudentId(
       student_id,
       staff_id,
+      staff_name,
       data,
     );
     return new HttpResponse(result, false);

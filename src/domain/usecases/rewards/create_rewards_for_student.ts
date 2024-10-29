@@ -61,6 +61,7 @@ export class CreateRewardsForStudentUseCase {
           staff_id,
           staff_name,
           student_id,
+          student.email,
           points.value,
           data,
         );
@@ -86,13 +87,14 @@ export class CreateRewardsForStudentUseCase {
         staff_id,
         staff_name,
         student_id,
+        student.email,
         points.value,
         data,
       );
 
       const reward_points = await this.rewardService.getStudentRewards(
         student_id,
-        data.student_email,
+        student.email,
       );
       const sum_of_points = getSum(reward_points.map((i) => i.points));
 
@@ -142,6 +144,7 @@ export class CreateRewardsForStudentUseCase {
     staff_id: string,
     staff_name: string,
     student_id: string,
+    student_email: string,
     value: number,
     data: CreateStudentRewardsDTO,
   ) {
@@ -149,6 +152,7 @@ export class CreateRewardsForStudentUseCase {
       staff_id,
       staff_name,
       student_id,
+      student_email,
       value,
       data,
     );

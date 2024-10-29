@@ -5,10 +5,6 @@ import { Service } from "typedi";
 export class CreateStudentHealthCheckDTO {
   @IsString()
   @IsNotEmpty()
-  readonly student_email: string;
-
-  @IsString()
-  @IsNotEmpty()
   readonly health_issue: string;
 
   @IsBoolean()

@@ -4,10 +4,6 @@ import { Service } from "typedi";
 
 @Service()
 export class CreateStudentRewardsDTO {
-  @IsString()
-  @IsNotEmpty()
-  readonly student_email: string;
-
   @IsEnum(REWARD_TYPES)
   @IsNotEmpty()
   readonly type: REWARD_TYPES;

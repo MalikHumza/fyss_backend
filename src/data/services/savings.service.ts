@@ -34,6 +34,7 @@ export class SavingsService {
     student_id: string,
     staff_id: string,
     staff_name: string,
+    student_name: string,
     data: CreateSavingLogsDTO,
   ) {
     return this.savings.create({
@@ -41,6 +42,7 @@ export class SavingsService {
         student_id,
         staff_id,
         staff_name,
+        student_name,
         ...data,
       },
     });

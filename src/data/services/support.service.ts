@@ -35,12 +35,14 @@ export class SupportPlanService {
   createSupportPlanForStudent(
     staff_id: string,
     student_id: string,
+    student_email: string,
     data: CreateSupportPlanDTO,
   ) {
     return this.support.create({
       data: {
         student_id,
         staff_id,
+        student_email,
         ...data,
       },
     });

@@ -42,6 +42,7 @@ export class CreateStudentHealthCheckUseCase {
         student_id,
         staff_id,
         staff_name,
+        student.email,
         data,
       );
     const response = {

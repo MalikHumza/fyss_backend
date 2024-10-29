@@ -41,11 +41,11 @@ export class StudentHealthService {
           from_duration: data.from_duration,
           to_duration: data.to_duration,
           follow_up_date: data.follow_up_date,
-          evidence: data.evidance
+          evidence: data.evidance,
         },
       });
     } catch (error) {
-      throw new HttpError(400, error.message)
+      throw new HttpError(400, error.message);
     }
   }
 }

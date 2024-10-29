@@ -6,10 +6,6 @@ import { Service } from "typedi";
 export class CreateRoomCheckDTO {
   @IsString()
   @IsNotEmpty()
-  readonly staff_name: string;
-
-  @IsString()
-  @IsNotEmpty()
   readonly purpose: string;
 
   @IsString()

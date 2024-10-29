@@ -20,12 +20,14 @@ export class RoomCheckService {
   createRoomCheckByStudentId(
     student_id: string,
     staff_id: string,
+    staff_name: string,
     data: CreateRoomCheckDTO,
   ) {
     return this.roomcheck.create({
       data: {
         student_id,
         staff_id,
+        staff_name,
         ...data,
       },
     });

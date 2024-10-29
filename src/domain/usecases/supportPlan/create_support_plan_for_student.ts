@@ -38,6 +38,7 @@ export class CreateSupportPlanForStudentUseCase {
     const result = await this.supportPlanService.createSupportPlanForStudent(
       staff_id,
       student_id,
+      student.email,
       data,
     );
     const response = {

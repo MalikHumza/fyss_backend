@@ -7,13 +7,13 @@ import { GetStationaryStocksUseCase } from "@domain/usecases/inventory/get_stati
 import { GetWelcomePackStockUseCase } from "@domain/usecases/inventory/get_welcome_pack_stocks_by_property copy";
 import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middleware";
 import {
-    Authorized,
-    Get,
-    HttpCode,
-    JsonController,
-    Param,
-    Req,
-    UseBefore,
+  Authorized,
+  Get,
+  HttpCode,
+  JsonController,
+  Param,
+  Req,
+  UseBefore,
 } from "routing-controllers";
 import Container from "typedi";
 
@@ -21,46 +21,76 @@ import Container from "typedi";
 @UseBefore(CheckTokenExpiry)
 @Authorized()
 export class InventoryController {
-    private getStationaryStocksUseCase = Container.get(GetStationaryStocksUseCase);
-    private getHygineProductStocksUseCase = Container.get(GetHygineProductStocksUseCase);
-    private getKeysStockByPropertyUseCase = Container.get(GetKeysStockByPropertyUseCase);
-    private getWelcomePackStockUseCase = Container.get(GetWelcomePackStockUseCase);
-    private getShoppingStockListUseCase = Container.get(GetShoppingStockListUseCase);
-    private getKnifeStockByPropertyUseCase = Container.get(GetKnifeStockByPropertyUseCase);
+  private getStationaryStocksUseCase = Container.get(
+    GetStationaryStocksUseCase,
+  );
+  private getHygineProductStocksUseCase = Container.get(
+    GetHygineProductStocksUseCase,
+  );
+  private getKeysStockByPropertyUseCase = Container.get(
+    GetKeysStockByPropertyUseCase,
+  );
+  private getWelcomePackStockUseCase = Container.get(
+    GetWelcomePackStockUseCase,
+  );
+  private getShoppingStockListUseCase = Container.get(
+    GetShoppingStockListUseCase,
+  );
+  private getKnifeStockByPropertyUseCase = Container.get(
+    GetKnifeStockByPropertyUseCase,
+  );
 
-    @Get("/stationary/:property_id")
-    @HttpCode(200)
-    getStationaryStockByProperty(@Req() req: RequestWithUser, @Param('property_id') property_id: string) {
-        return this.getStationaryStocksUseCase.call(req, property_id);
-    }
+  @Get("/stationary/:property_id")
+  @HttpCode(200)
+  getStationaryStockByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getStationaryStocksUseCase.call(req, property_id);
+  }
 
-    @Get("/hygine-products/:property_id")
-    @HttpCode(200)
-    getHygineProductsStockByProperty(@Req() req: RequestWithUser, @Param("property_id") property_id: string) {
-        return this.getHygineProductStocksUseCase.call(req, property_id);
-    }
+  @Get("/hygine-products/:property_id")
+  @HttpCode(200)
+  getHygineProductsStockByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getHygineProductStocksUseCase.call(req, property_id);
+  }
 
-    @Get("/keys/:property_id")
-    @HttpCode(200)
-    getKeysListByProperty(@Req() req: RequestWithUser, @Param("property_id") property_id: string) {
-        return this.getKeysStockByPropertyUseCase.call(req, property_id);
-    }
+  @Get("/keys/:property_id")
+  @HttpCode(200)
+  getKeysListByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getKeysStockByPropertyUseCase.call(req, property_id);
+  }
 
-    @Get("/welcome-pack/:property_id")
-    @HttpCode(200)
-    getWelcomePackStockByProperty(@Req() req: RequestWithUser, @Param("property_id") property_id: string) {
-        return this.getWelcomePackStockUseCase.call(req, property_id);
-    }
+  @Get("/welcome-pack/:property_id")
+  @HttpCode(200)
+  getWelcomePackStockByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getWelcomePackStockUseCase.call(req, property_id);
+  }
 
-    @Get("/shopping-stock/:property_id")
-    @HttpCode(200)
-    getShoppingStockListByProperty(@Req() req: RequestWithUser, @Param("property_id") property_id: string) {
-        return this.getShoppingStockListUseCase.call(req, property_id);
-    }
+  @Get("/shopping-stock/:property_id")
+  @HttpCode(200)
+  getShoppingStockListByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getShoppingStockListUseCase.call(req, property_id);
+  }
 
-    @Get("/shopping-stock/:property_id")
-    @HttpCode(200)
-    getKnifeStockByProperty(@Req() req: RequestWithUser, @Param("property_id") property_id: string) {
-        return this.getKnifeStockByPropertyUseCase.call(req, property_id);
-    }
+  @Get("/shopping-stock/:property_id")
+  @HttpCode(200)
+  getKnifeStockByProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+  ) {
+    return this.getKnifeStockByPropertyUseCase.call(req, property_id);
+  }
 }

@@ -227,20 +227,24 @@ model StudentRewardsProgress {
 }
 
 model Properties {
-  id                     String                   @id @default(cuid())
-  name                   String
-  location               String
-  occupancy              Int
-  image                  String?
-  description            String?
-  staff_id               String
-  staff                  User?                    @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt              DateTime                 @default(now())
-  updatedAt              DateTime                 @updatedAt
-  ShiftTracker           ShiftTracker[]
-  TrainingDates          TrainingDates[]
-  ShoppingStockInventory ShoppingStockInventory[]
-  KnifeInventory         KnifeInventory[]
+  id                      String                    @id @default(cuid())
+  name                    String
+  location                String
+  occupancy               Int
+  image                   String?
+  description             String?
+  staff_id                String
+  staff                   User?                     @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  ShiftTracker            ShiftTracker[]
+  TrainingDates           TrainingDates[]
+  ShoppingStockInventory  ShoppingStockInventory[]
+  KnifeInventory          KnifeInventory[]
+  StationaryInventory     StationaryInventory[]
+  HygineProductsInventory HygineProductsInventory[]
+  WelcomePackInventory    WelcomePackInventory[]
+  KeysInventory           KeysInventory[]
 }
 
 model ShiftTracker {
@@ -295,4 +299,52 @@ model KnifeInventory {
   properties    Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+}
+
+model StationaryInventory {
+  id             String      @id @default(cuid())
+  name           String
+  location       String
+  default_amount Int
+  quantity       Int
+  property_id    String
+  properties     Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model HygineProductsInventory {
+  id             String      @id @default(cuid())
+  name           String
+  location       String
+  default_amount Int
+  quantity       Int
+  property_id    String
+  properties     Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model KeysInventory {
+  id             String      @id @default(cuid())
+  name           String
+  location       String
+  default_amount Int
+  quantity       Int
+  property_id    String
+  properties     Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model WelcomePackInventory {
+  id             String      @id @default(cuid())
+  item           String
+  room           String
+  default_amount Int
+  quantity       Int
+  property_id    String
+  properties     Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 }

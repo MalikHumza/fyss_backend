@@ -13,11 +13,11 @@ export class GetStaffDashboardUseCase {
 
   public async call(req: RequestWithUser) {
     const { id, name } = req.user;
-    const [user, properties] = await Promise.all([
+    const [user, staff_has_property] = await Promise.all([
       this.userService.findUserWithId(id),
-      this.propertiesService.getPropertiesByStaffId(id),
+      this.propertiesService.getStaffHasProperty(id),
     ]);
-
+    const properties = await this.propertiesService.getPropertiesById(staff_has_property.map(i => i.property_id));
     const response = {
       name,
       title: user.title,

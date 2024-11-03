@@ -95,6 +95,7 @@ model User {
   SatffHasPettyCash      SatffHasPettyCash[]
   StaffHasTravelExpense  StaffHasTravelExpense[]
   StaffHasProperty       StaffHasProperty[]
+  ShiftTracker           ShiftTracker[]
 
   @@unique([id])
 }
@@ -274,6 +275,8 @@ model ShiftTracker {
   shift           SHIFT
   verbal_handover Boolean
   property_id     String?
+  user_id         String?
+  user            User?       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   property        Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt

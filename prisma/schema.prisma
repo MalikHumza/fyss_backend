@@ -72,19 +72,16 @@ enum INCIDENT_CONTACTED {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  name           String?
-  email          String   @unique
-  title          String?
-  dob            Int?
-  phone_number   String?
-  gender         String?
-  role           Roles    @default(STUDENT)
-  image          String?
-  hashedPassword String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
+  id                     String                  @id @default(cuid())
+  name                   String?
+  email                  String                  @unique
+  title                  String?
+  dob                    Int?
+  phone_number           String?
+  gender                 String?
+  role                   Roles                   @default(STUDENT)
+  image                  String?
+  hashedPassword         String
   sessions               Session[]
   RoomCheck              RoomCheck[]
   Savings                Savings[]
@@ -94,6 +91,10 @@ model User {
   Rewards                Rewards[]
   StudentRewardsProgress StudentRewardsProgress?
   Properties             Properties[]
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  SatffHasPettyCash      SatffHasPettyCash[]
+  StaffHasTravelExpense  StaffHasTravelExpense[]
 
   @@unique([id])
 }
@@ -103,9 +104,9 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model RoomCheck {
@@ -226,33 +227,35 @@ model StudentRewardsProgress {
   total_points   Int?     @default(0)
   current_level  Int      @default(0)
   points_to_next Int      @default(500)
+  student        User?    @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-
-  student User? @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Properties {
-  id                      String                       @id @default(cuid())
-  name                    String
-  location                String
-  occupancy               Int
-  image                   String?
-  description             String?
-  staff_id                String
-  staff                   User?                        @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt               DateTime                     @default(now())
-  updatedAt               DateTime                     @updatedAt
-  ShiftTracker            ShiftTracker[]
-  TrainingDates           TrainingDates[]
-  ShoppingStockInventory  ShoppingStockInventory[]
-  KnifeInventory          KnifeInventory[]
-  StationaryInventory     StationaryInventory[]
-  HygineProductsInventory HygineProductsInventory[]
-  WelcomePackInventory    WelcomePackInventory[]
-  KeysInventory           KeysInventory[]
-  PersonToPersonLog       AlcohalAndDrugsLogIncident[]
-  MissingFromCareIncident MissingFromCareIncident[]
+  id                          String                        @id @default(cuid())
+  name                        String
+  location                    String
+  occupancy                   Int
+  image                       String?
+  description                 String?
+  staff_id                    String
+  staff                       User?                         @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ShiftTracker                ShiftTracker[]
+  TrainingDates               TrainingDates[]
+  ShoppingStockInventory      ShoppingStockInventory[]
+  KnifeInventory              KnifeInventory[]
+  StationaryInventory         StationaryInventory[]
+  HygineProductsInventory     HygineProductsInventory[]
+  WelcomePackInventory        WelcomePackInventory[]
+  KeysInventory               KeysInventory[]
+  PersonToPersonLog           AlcohalAndDrugsLogIncident[]
+  MissingFromCareIncident     MissingFromCareIncident[]
+  pettyCashFinancial          SatffHasPettyCash[]
+  createdAt                   DateTime                      @default(now())
+  updatedAt                   DateTime                      @updatedAt
+  StaffTravelExpense          StaffHasTravelExpense[]
+  PropertyHasPettyCashBalance PropertyHasPettyCashBalance[]
 }
 
 model ShiftTracker {
@@ -392,3 +395,40 @@ model MissingFromCareIncident {
   updatedAt           DateTime    @updatedAt
 }
 
+model SatffHasPettyCash {
+  id          String      @id @default(cuid())
+  purpose     String
+  notes       String
+  deposit     Int
+  credit      Int
+  staff_id    String
+  property_id String?
+  user        User?       @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  properties  Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model PropertyHasPettyCashBalance {
+  id                  String      @id @default(cuid())
+  balance             Int         @default(0)
+  property_id         String?
+  property            Properties? @relation(fields: [property_id], references: [id])
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  satffHasPettyCashId String?
+}
+
+model StaffHasTravelExpense {
+  id          String      @id @default(cuid())
+  purpose     String
+  origin      String
+  destination String
+  expense     Int         @default(0)
+  property_id String?
+  staff_id    String
+  user        User?       @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  properties  Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}

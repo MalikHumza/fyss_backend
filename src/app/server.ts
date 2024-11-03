@@ -14,6 +14,8 @@ import { PropertiesController } from "@infrastructure/controllers/properties.con
 import { ShiftTrackerController } from "@infrastructure/controllers/shift_tracker.controller";
 import { TrainingDatesController } from "@infrastructure/controllers/training_dates.controller";
 import { InventoryController } from "@infrastructure/controllers/inventory.controller";
+import { FinancialController } from "@infrastructure/controllers/financial.controller";
+import { IncidentsController } from "@infrastructure/controllers/incidents.controller";
 
 ValidateEnv();
 
@@ -32,6 +34,8 @@ const app = new App([
   ShiftTrackerController,
   TrainingDatesController,
   InventoryController,
+  FinancialController,
+  IncidentsController,
 ]);
 
 app.listen();

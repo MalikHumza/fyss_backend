@@ -10,12 +10,16 @@ export class ShiftTrackerService {
     return this.shiftTracker.findMany({
       where: {
         property_id,
-        user_id: staff_id
+        user_id: staff_id,
       },
     });
   }
 
-  createShiftRecordsByProperty(staff_id: string, property_id: string, data: CreateShiftRecordsDTO) {
+  createShiftRecordsByProperty(
+    staff_id: string,
+    property_id: string,
+    data: CreateShiftRecordsDTO,
+  ) {
     return this.shiftTracker.create({
       data: {
         user_id: staff_id,
@@ -23,8 +27,8 @@ export class ShiftTrackerService {
         from: data.from,
         to: data.to,
         shift: data.shift,
-        verbal_handover: data.verbal_handover
-      }
-    })
+        verbal_handover: data.verbal_handover,
+      },
+    });
   }
 }

@@ -37,10 +37,18 @@ export class ShiftTrackerController {
     return this.getShiftTrackerByPropertyIdUseCase.call(req, property_id);
   }
 
-  @Post('/create/:property_id')
+  @Post("/create/:property_id")
   @UseBefore(ValidationMiddleware(CreateShiftRecordsDTO))
   @HttpCode(201)
-  createShiftRecordsByProperty(req: RequestWithUser, @Param('property_id') property_id: string, @Body() data: CreateShiftRecordsDTO) {
-    return this.createShiftRecordsByPropertyUseCase.call(req, property_id, data);
+  createShiftRecordsByProperty(
+    req: RequestWithUser,
+    @Param("property_id") property_id: string,
+    @Body() data: CreateShiftRecordsDTO,
+  ) {
+    return this.createShiftRecordsByPropertyUseCase.call(
+      req,
+      property_id,
+      data,
+    );
   }
 }

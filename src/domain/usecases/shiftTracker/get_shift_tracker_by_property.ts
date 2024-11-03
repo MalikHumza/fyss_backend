@@ -15,7 +15,7 @@ export class GetShiftTrackerByPropertyIdUseCase {
     const staff_id = req.user.id;
     const role = req.user.role;
     if (role === Roles.STUDENT) {
-      throw new HttpError(400, 'Student not Authorized');
+      throw new HttpError(400, "Student not Authorized");
     }
     const staff_name = req.user.name;
     const result = await this.shiftTracker.getShiftsRecordByPropertyId(

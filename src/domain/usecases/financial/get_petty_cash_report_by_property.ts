@@ -9,35 +9,39 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class GetPettyCashFinancialByPropertyUseCase {
-    @Inject()
-    private petty_cash_financial: PettyCashFinancialService;
-    @Inject()
-    private petty_cash_balance: PettyCashBalanceService;
-    @Inject()
-    private user_service: UserService;
+  @Inject()
+  private petty_cash_financial: PettyCashFinancialService;
+  @Inject()
+  private petty_cash_balance: PettyCashBalanceService;
+  @Inject()
+  private user_service: UserService;
 
-    public async call(req: RequestWithUser, property_id: string) {
-        const role = req.user.role;
-        if (role === Roles.STUDENT) {
-            throw new HttpError(400, 'Student not Authorized');
-        }
-        const report = await this.petty_cash_financial.getAllPettyCashReportByProperty(property_id);
-        const balance = await this.petty_cash_balance.getPettyCashBalanceByProperty(property_id);
-        const response = await Promise.all(
-            report.map(async i => {
-                const user = await this.user_service.findUserWithId(i.staff_id);
-                return {
-                    id: i.id,
-                    purpose: i.purpose,
-                    notes: i.notes,
-                    credit: i.credit,
-                    deposit: i.deposit,
-                    balance: balance[0].balance,
-                    staff_name: user.name
-                };
-            }),
-        );
-
-        return new HttpResponse(response, false);
+  public async call(req: RequestWithUser, property_id: string) {
+    const role = req.user.role;
+    if (role === Roles.STUDENT) {
+      throw new HttpError(400, "Student not Authorized");
     }
+    const report =
+      await this.petty_cash_financial.getAllPettyCashReportByProperty(
+        property_id,
+      );
+    const balance =
+      await this.petty_cash_balance.getPettyCashBalanceByProperty(property_id);
+    const response = await Promise.all(
+      report.map(async (i) => {
+        const user = await this.user_service.findUserWithId(i.staff_id);
+        return {
+          id: i.id,
+          purpose: i.purpose,
+          notes: i.notes,
+          credit: i.credit,
+          deposit: i.deposit,
+          balance: balance[0].balance,
+          staff_name: user.name,
+        };
+      }),
+    );
+
+    return new HttpResponse(response, false);
+  }
 }

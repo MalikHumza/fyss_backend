@@ -3,13 +3,13 @@ import { Service } from "typedi";
 
 @Service()
 export class StaffTravelExpenseService {
-    public travel_expense = database.instance.staffHasTravelExpense;
+  public travel_expense = database.instance.staffHasTravelExpense;
 
-    getAllTravelExpenseByProperty(property_id: string) {
-        return this.travel_expense.findMany({
-            where: {
-                property_id
-            }
-        })
-    }
+  getAllTravelExpenseByProperty(property_id: string) {
+    return this.travel_expense.findMany({
+      where: {
+        property_id,
+      },
+    });
+  }
 }

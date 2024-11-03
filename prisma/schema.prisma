@@ -65,6 +65,12 @@ enum SHIFT {
   NIGHT
 }
 
+enum INCIDENT_CONTACTED {
+  POLICE
+  SOCIAL_WORKER
+  MANAGER
+}
+
 model User {
   id             String   @id @default(cuid())
   name           String?
@@ -227,16 +233,16 @@ model StudentRewardsProgress {
 }
 
 model Properties {
-  id                      String                    @id @default(cuid())
+  id                      String                       @id @default(cuid())
   name                    String
   location                String
   occupancy               Int
   image                   String?
   description             String?
   staff_id                String
-  staff                   User?                     @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
+  staff                   User?                        @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt               DateTime                     @default(now())
+  updatedAt               DateTime                     @updatedAt
   ShiftTracker            ShiftTracker[]
   TrainingDates           TrainingDates[]
   ShoppingStockInventory  ShoppingStockInventory[]
@@ -245,6 +251,8 @@ model Properties {
   HygineProductsInventory HygineProductsInventory[]
   WelcomePackInventory    WelcomePackInventory[]
   KeysInventory           KeysInventory[]
+  PersonToPersonLog       AlcohalAndDrugsLogIncident[]
+  MissingFromCareIncident MissingFromCareIncident[]
 }
 
 model ShiftTracker {
@@ -348,3 +356,39 @@ model WelcomePackInventory {
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 }
+
+model AlcohalAndDrugsLogIncident {
+  id                     String             @id @default(cuid())
+  description            String
+  location               String
+  found_by               String
+  contacted              INCIDENT_CONTACTED
+  police_involved        String?
+  action_to_be_taken     String
+  action_taken_by        String
+  date_of_action         Int
+  disposed               String?
+  witnesses              String[]
+  risk_assessment        String
+  notes                  String?
+  completion_target_date Int
+  completed_by_date      Int
+  reported_by            String
+  property_id            String?
+  properties             Properties?        @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+}
+
+model MissingFromCareIncident {
+  id                  String      @id @default(cuid())
+  yp                  String
+  unit_left_time      Int
+  last_description    Int
+  contacted_authority Boolean
+  property_id         String?
+  properties          Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+

@@ -15,11 +15,13 @@ export class GetPropertiesByStaffUseCase {
     const staff_id = req.user.id;
     const role = req.user.role;
     if (role === Roles.STUDENT) {
-      throw new HttpError(400, 'Student not Authorized');
+      throw new HttpError(400, "Student not Authorized");
     }
     const staff_has_property =
       await this.propertiesService.getStaffHasProperty(staff_id);
-    const properties = await this.propertiesService.getPropertiesById(staff_has_property.map(i => i.property_id));
+    const properties = await this.propertiesService.getPropertiesById(
+      staff_has_property.map((i) => i.property_id),
+    );
     const response = properties.map((i) => ({
       id: i.id,
       staff_id,
@@ -28,7 +30,7 @@ export class GetPropertiesByStaffUseCase {
       location: i.location,
       occupancy: i.occupancy,
       description: i.description,
-      created_at: DateToMiliSeconds(i.createdAt)
+      created_at: DateToMiliSeconds(i.createdAt),
     }));
     return new HttpResponse(response, false);
   }

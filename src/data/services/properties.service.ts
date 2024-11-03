@@ -15,18 +15,18 @@ export class PropertiesService {
     return this.properties.findMany({
       where: {
         id: {
-          in: ids
-        }
-      }
+          in: ids,
+        },
+      },
     });
   }
 
   getStaffHasProperty(staff_id: string) {
     return this.staff_has_property.findMany({
       where: {
-        staff_id
-      }
-    })
+        staff_id,
+      },
+    });
   }
 
   getPropertyById(id: string) {
@@ -40,8 +40,8 @@ export class PropertiesService {
         location: data.location,
         occupancy: data.occupancy,
         image: data.image,
-        description: data.description
-      }
+        description: data.description,
+      },
     });
   }
 
@@ -50,7 +50,7 @@ export class PropertiesService {
       data: {
         property_id,
         staff_id,
-      }
-    })
+      },
+    });
   }
 }

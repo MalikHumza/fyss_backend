@@ -29,7 +29,9 @@ export class PropertiesController {
   );
   private getPropertyByIdUseCase = Container.get(GetPropertyByIdUseCase);
   private createPropertyUseCase = Container.get(CreatePropertyUseCase);
-  private createStaffHasPropertyUseCase = Container.get(CreateStaffHasPropertyUseCase);
+  private createStaffHasPropertyUseCase = Container.get(
+    CreateStaffHasPropertyUseCase,
+  );
 
   @Get("/")
   @HttpCode(200)
@@ -49,13 +51,21 @@ export class PropertiesController {
   @Post("/create")
   @UseBefore(ValidationMiddleware(CreatePropertyDTO))
   @HttpCode(201)
-  createProperty(@Req() req: RequestWithUser, @Body() data: CreatePropertyDTO, @UploadedFile('image') file?: Express.Multer.File) {
+  createProperty(
+    @Req() req: RequestWithUser,
+    @Body() data: CreatePropertyDTO,
+    @UploadedFile("image") file?: Express.Multer.File,
+  ) {
     return this.createPropertyUseCase.call(req, data, file);
   }
 
   @Post("/create/:staff_id/:property_id")
   @HttpCode(201)
-  createStaffHasProperty(@Req() req: RequestWithUser, @Param('staff_id') staff_id: string, @Param('property_id') property_id: string) {
+  createStaffHasProperty(
+    @Req() req: RequestWithUser,
+    @Param("staff_id") staff_id: string,
+    @Param("property_id") property_id: string,
+  ) {
     return this.createStaffHasPropertyUseCase.call(req, staff_id, property_id);
   }
 }

@@ -3,24 +3,23 @@ import { Service } from "typedi";
 
 @Service()
 export class CreatePropertyDTO {
-    @IsString()
-    @IsNotEmpty()
-    readonly name: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    readonly location: string;
+  @IsString()
+  @IsNotEmpty()
+  readonly location: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    readonly occupancy: number;
+  @IsNumber()
+  @IsNotEmpty()
+  readonly occupancy: number;
 
-    @IsString()
-    @IsOptional()
-    readonly image?: string;
+  @IsString()
+  @IsOptional()
+  readonly image?: string;
 
-    @IsString()
-    @IsOptional()
-    readonly description?: string;
-
+  @IsString()
+  @IsOptional()
+  readonly description?: string;
 }

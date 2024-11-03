@@ -14,11 +14,9 @@ export class GetPropertyByIdUseCase {
     const staff_id = req.user.id;
     const role = req.user.role;
     if (role === Roles.STUDENT) {
-      throw new HttpError(400, 'Student not Authorized');
+      throw new HttpError(400, "Student not Authorized");
     }
-    const result = await this.propertiesService.getPropertyById(
-      property_id
-    );
+    const result = await this.propertiesService.getPropertyById(property_id);
     const response = {
       id: result.id,
       staff_id,

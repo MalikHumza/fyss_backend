@@ -10,25 +10,29 @@ import { Inject, Service } from "typedi";
 
 @Service()
 export class CreatePropertyUseCase {
-    @Inject()
-    private property_service: PropertiesService;
+  @Inject()
+  private property_service: PropertiesService;
 
-    public async call(req: RequestWithUser, data: CreatePropertyDTO, file?: Express.Multer.File) {
-        const role = req.user.role;
-        if (role === Roles.STUDENT) {
-            throw new HttpError(400, 'Student not Authorized');
-        };
-        await FormValidationMiddleware(data);
-        const property = await this.property_service.createProperty(data);
-        const result = {
-            id: property.id,
-            name: property.name,
-            location: property.location,
-            occupancy: property.occupancy,
-            image: property.image || null,
-            description: property.description || '',
-            created_at: DateToMiliSeconds(property.createdAt)
-        }
-        return new HttpResponse(result, false);
+  public async call(
+    req: RequestWithUser,
+    data: CreatePropertyDTO,
+    file?: Express.Multer.File,
+  ) {
+    const role = req.user.role;
+    if (role === Roles.STUDENT) {
+      throw new HttpError(400, "Student not Authorized");
     }
+    await FormValidationMiddleware(data);
+    const property = await this.property_service.createProperty(data);
+    const result = {
+      id: property.id,
+      name: property.name,
+      location: property.location,
+      occupancy: property.occupancy,
+      image: property.image || null,
+      description: property.description || "",
+      created_at: DateToMiliSeconds(property.createdAt),
+    };
+    return new HttpResponse(result, false);
+  }
 }

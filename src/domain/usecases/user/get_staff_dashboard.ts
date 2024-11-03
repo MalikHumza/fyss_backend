@@ -17,7 +17,9 @@ export class GetStaffDashboardUseCase {
       this.userService.findUserWithId(id),
       this.propertiesService.getStaffHasProperty(id),
     ]);
-    const properties = await this.propertiesService.getPropertiesById(staff_has_property.map(i => i.property_id));
+    const properties = await this.propertiesService.getPropertiesById(
+      staff_has_property.map((i) => i.property_id),
+    );
     const response = {
       name,
       title: user.title,

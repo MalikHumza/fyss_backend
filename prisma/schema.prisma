@@ -96,6 +96,7 @@ model User {
   StaffHasTravelExpense  StaffHasTravelExpense[]
   StaffHasProperty       StaffHasProperty[]
   ShiftTracker           ShiftTracker[]
+  TrainingDates          TrainingDates[]
 
   @@unique([id])
 }
@@ -287,9 +288,11 @@ model TrainingDates {
   topic       String
   summary     String
   notes       String?
-  from        String
-  to          String
+  from        Int
+  to          Int
+  staff_id    String?
   property_id String?
+  staff       User?       @relation(fields: [staff_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   property    Properties? @relation(fields: [property_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

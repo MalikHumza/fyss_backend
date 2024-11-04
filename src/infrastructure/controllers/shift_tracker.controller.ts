@@ -41,7 +41,7 @@ export class ShiftTrackerController {
   @UseBefore(ValidationMiddleware(CreateShiftRecordsDTO))
   @HttpCode(201)
   createShiftRecordsByProperty(
-    req: RequestWithUser,
+    @Req() req: RequestWithUser,
     @Param("property_id") property_id: string,
     @Body() data: CreateShiftRecordsDTO,
   ) {

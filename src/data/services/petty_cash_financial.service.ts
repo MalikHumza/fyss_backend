@@ -14,7 +14,11 @@ export class PettyCashFinancialService {
     });
   }
 
-  createPettyCashReportForProperty(property_id: string, staff_id: string, data: CreatePettyCashReportDTO) {
+  createPettyCashReportForProperty(
+    property_id: string,
+    staff_id: string,
+    data: CreatePettyCashReportDTO,
+  ) {
     return this.petty_cash.create({
       data: {
         staff_id,
@@ -22,8 +26,8 @@ export class PettyCashFinancialService {
         purpose: data.purpose,
         notes: data.notes,
         credit: data.credit,
-        deposit: data.deposit
-      }
+        deposit: data.deposit,
+      },
     });
   }
 }

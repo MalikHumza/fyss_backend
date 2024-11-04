@@ -50,10 +50,14 @@ export class FinancialController {
     return this.getStaffTravelExpenseUseCase.call(req, property_id);
   }
 
-  @Post('/petty_cash/create/:property_id')
+  @Post("/petty_cash/create/:property_id")
   @UseBefore(ValidationMiddleware(CreatePettyCashReportDTO))
   @HttpCode(201)
-  createPettyCashForProperty(@Req() req: RequestWithUser, @Param('property_id') property_id: string, @Body() data: CreatePettyCashReportDTO) {
+  createPettyCashForProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+    @Body() data: CreatePettyCashReportDTO,
+  ) {
     return this.createPettyCashReportUseCase.call(req, property_id, data);
   }
 }

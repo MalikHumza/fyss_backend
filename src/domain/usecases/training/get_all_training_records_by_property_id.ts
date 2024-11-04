@@ -17,20 +17,19 @@ export class GetAllTrainingDatesByPropertyIdUseCase {
   public async call(req: RequestWithUser, property_id: string) {
     const role = req.user.role;
     if (role === Roles.STUDENT) {
-      throw new HttpError(400, 'Student not Authorized');
+      throw new HttpError(400, "Student not Authorized");
     }
 
-    const result = await this.trainingService.getAllTrainingRecordsByPropertyId(
-      property_id,
-    );
+    const result =
+      await this.trainingService.getAllTrainingRecordsByPropertyId(property_id);
 
     const response = await Promise.all(
-      result.map(async i => {
+      result.map(async (i) => {
         const staff = await this.userService.findUserWithId(i.staff_id);
         return {
           id: i.id,
           staff_id: i.staff_id,
-          staff_name: staff.name || '',
+          staff_name: staff.name || "",
           property_id,
           topic: i.topic,
           summary: i.summary,
@@ -38,7 +37,7 @@ export class GetAllTrainingDatesByPropertyIdUseCase {
           from_time: i.from,
           to_time: i.to,
           created_at: DateToMiliSeconds(i.createdAt),
-        }
+        };
       }),
     );
 

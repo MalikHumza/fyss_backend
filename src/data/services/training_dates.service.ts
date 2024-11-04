@@ -9,12 +9,16 @@ export class TrainingDateService {
   getAllTrainingRecordsByPropertyId(property_id: string) {
     return this.training.findMany({
       where: {
-        property_id
+        property_id,
       },
     });
   }
 
-  createTrainingForProperty(property_id: string, staff_id: string, data: CreateTrainingDatesDTO) {
+  createTrainingForProperty(
+    property_id: string,
+    staff_id: string,
+    data: CreateTrainingDatesDTO,
+  ) {
     return this.training.create({
       data: {
         property_id,
@@ -23,8 +27,8 @@ export class TrainingDateService {
         summary: data.summary,
         notes: data.notes,
         from: data.from,
-        to: data.to
-      }
-    })
+        to: data.to,
+      },
+    });
   }
 }

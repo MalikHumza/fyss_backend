@@ -37,10 +37,20 @@ export class TrainingDatesController {
     return this.getAllTrainingDatesByPropertyIdUseCase.call(req, property_id);
   }
 
-  @Post('/create/:property_id/:staff_id')
+  @Post("/create/:property_id/:staff_id")
   @UseBefore(ValidationMiddleware(CreateTrainingDatesDTO))
   @HttpCode(201)
-  createTrainingRecordsForProperty(@Req() req: RequestWithUser, @Param('property_id') property_id: string, @Param('staff_id') staff_id: string, @Body() data: CreateTrainingDatesDTO) {
-    return this.createTrainingRecordsByPropertyUseCase.call(req, property_id, staff_id, data);
+  createTrainingRecordsForProperty(
+    @Req() req: RequestWithUser,
+    @Param("property_id") property_id: string,
+    @Param("staff_id") staff_id: string,
+    @Body() data: CreateTrainingDatesDTO,
+  ) {
+    return this.createTrainingRecordsByPropertyUseCase.call(
+      req,
+      property_id,
+      staff_id,
+      data,
+    );
   }
 }

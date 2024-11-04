@@ -14,7 +14,11 @@ export class StaffTravelExpenseService {
     });
   }
 
-  createStaffTravelExpense(property_id: string, staff_id: string, data: CreateStaffTravelExpenseDTO) {
+  createStaffTravelExpense(
+    property_id: string,
+    staff_id: string,
+    data: CreateStaffTravelExpenseDTO,
+  ) {
     return this.travel_expense.create({
       data: {
         property_id,
@@ -22,8 +26,8 @@ export class StaffTravelExpenseService {
         purpose: data.purpose,
         origin: data.origin,
         destination: data.destination,
-        expense: data.expense
-      }
-    })
+        expense: data.expense,
+      },
+    });
   }
 }

@@ -5,7 +5,6 @@ import { CreateStaffHasPropertyUseCase } from "@domain/usecases/properties/creat
 import { GetPropertiesByStaffUseCase } from "@domain/usecases/properties/get_properties_by_staff";
 import { GetPropertyByIdUseCase } from "@domain/usecases/properties/get_property_by_id";
 import { CheckTokenExpiry } from "@infrastructure/middlewares/token_expiry.middleware";
-import { ValidationMiddleware } from "@infrastructure/middlewares/validation.middleware";
 import {
   Authorized,
   Body,
@@ -33,6 +32,16 @@ export class PropertiesController {
     CreateStaffHasPropertyUseCase,
   );
 
+  @Post("/create")
+  @HttpCode(201)
+  createProperty(
+    @Req() req: RequestWithUser,
+    @Body() data: CreatePropertyDTO,
+    @UploadedFile("image") file?: Express.Multer.File,
+  ) {
+    return this.createPropertyUseCase.call(req, data, file);
+  }
+
   @Get("/")
   @HttpCode(200)
   getPropertiesByStaff(@Req() req: RequestWithUser) {
@@ -46,17 +55,6 @@ export class PropertiesController {
     @Param("property_id") property_id: string,
   ) {
     return this.getPropertyByIdUseCase.call(req, property_id);
-  }
-
-  @Post("/create")
-  @UseBefore(ValidationMiddleware(CreatePropertyDTO))
-  @HttpCode(201)
-  createProperty(
-    @Req() req: RequestWithUser,
-    @Body() data: CreatePropertyDTO,
-    @UploadedFile("image") file?: Express.Multer.File,
-  ) {
-    return this.createPropertyUseCase.call(req, data, file);
   }
 
   @Post("/create/:staff_id/:property_id")

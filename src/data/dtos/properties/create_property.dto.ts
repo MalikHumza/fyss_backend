@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Service } from "typedi";
 
 @Service()
@@ -11,7 +12,8 @@ export class CreatePropertyDTO {
   @IsNotEmpty()
   readonly location: string;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsNotEmpty()
   readonly occupancy: number;
 

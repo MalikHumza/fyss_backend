@@ -57,6 +57,9 @@ export class LoginUseCase {
         image: user.image,
         role: user.role,
       };
+
+    return new HttpResponse(response, false);
+
     }
     const sessionUpdate = await this.authService.updateUserSession(
       isSession.id,

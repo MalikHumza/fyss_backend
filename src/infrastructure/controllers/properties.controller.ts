@@ -50,7 +50,7 @@ export class PropertiesController {
     return this.getPropertiesByStaffUseCase.call(req);
   }
 
-  @Get('/')
+  @Get("/")
   @HttpCode(200)
   getAllProperties(@Req() req: RequestWithUser) {
     return this.getAllPropertiesUseCase.call(req);

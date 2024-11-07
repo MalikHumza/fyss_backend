@@ -17,8 +17,7 @@ export class GetAllPropertiesUseCase {
       throw new HttpError(400, "Student not Authorized");
     }
 
-    const properties =
-      await this.propertiesService.getAllProperties();
+    const properties = await this.propertiesService.getAllProperties();
 
     const response = properties.map((i) => ({
       id: i.id,

@@ -9,7 +9,7 @@ export class AuthService {
 
   async createUser(data: SignUpDTO) {
     const hashedPassword = await bcrypt.hash(data.password, 10);
-    return this.auth.create({ 
+    return this.auth.create({
       data: {
         email: data.email,
         name: data.name,

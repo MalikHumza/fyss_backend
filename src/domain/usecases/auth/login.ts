@@ -58,8 +58,7 @@ export class LoginUseCase {
         role: user.role,
       };
 
-    return new HttpResponse(response, false);
-
+      return new HttpResponse(response, false);
     }
     const sessionUpdate = await this.authService.updateUserSession(
       isSession.id,
